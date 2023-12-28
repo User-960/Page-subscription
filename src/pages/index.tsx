@@ -1,7 +1,7 @@
+import Home from '@/components/screens/home/Home'
+
 export const HomePage = () => {
-  return (
-    <h1>Page</h1>
-  )
+	return <Home />
 }
 
 export default HomePage
