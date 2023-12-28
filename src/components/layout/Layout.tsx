@@ -1,6 +1,8 @@
 // import localFont from 'next/font/local'
 import { FC, Fragment, ReactNode } from 'react'
 
+import Menu from '../ui/menu/Menu'
+
 import Meta from '../seo/Meta'
 import { IMeta } from '../seo/meta.interface'
 
@@ -22,7 +24,9 @@ const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
 		<>
 			<Meta title={meta.title} description={meta.description}>
 				<div className={styles.mainWrapper}>
-					<header className={styles.header}></header>
+					<header className={styles.header}>
+						<Menu />
+					</header>
 
 					<main className={styles.contentWrapper}>
 						{children && <Fragment>{children}</Fragment>}
