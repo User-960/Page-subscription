@@ -1,0 +1,36 @@
+@import 'src/assets/styles/variables';
+
+.title {
+	max-width: 696px;
+	width: 100%;
+	min-height: 258px;
+	margin-bottom: 28px;
+
+	font-family: 'Poppins';
+	font-weight: 400;
+	font-size: 76px;
+	line-height: 85.5px;
+
+	color: $white;
+
+	/* text-shadow:
+		0px 0px 0.2px #d383fc,
+		0 0 0.02em #cb6afb,
+		0 0 0.05em #cb6afb33; */
+}
+
+.subTitle {
+	max-width: 590px;
+	min-height: 59px;
+	margin-bottom: 40px;
+}
+
+.cycleShadow {
+	position: absolute;
+	width: 630px;
+	height: 630px;
+
+	background-image: url('../../../../public/images/cycleShadow.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
