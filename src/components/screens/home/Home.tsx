@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Form from '@/components/ui/form/Form'
 
@@ -13,6 +13,12 @@ const Home = () => {
 		description: 'main page'
 	}
 
+	const [email, setEmail] = useState<string>('')
+
+	const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
+		setEmail(e.currentTarget.value)
+	}
+
 	return (
 		<Layout meta={meta}>
 			<section className='flex'>
@@ -25,7 +31,13 @@ const Home = () => {
 						Analyze your subscription ecosystem for cost optimization and risk
 						management
 					</p>
-					<Form />
+
+					<Form
+						placeholder='Your business email...'
+						onChange={onChangeEmail}
+						value={email}
+						type='email'
+					/>
 				</div>
 
 				<div>Section</div>
