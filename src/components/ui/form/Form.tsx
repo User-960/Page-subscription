@@ -1,9 +1,5 @@
-import Image from 'next/image'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Message, Path, UseFormRegister, ValidationRule } from 'react-hook-form'
-
-import errorIcon from '../../../../public/images/error.svg'
-import successIcon from '../../../../public/images/success.svg'
 
 import styles from './Form.module.scss'
 import { IFormFields } from '@/interfaces/form.interface'
@@ -32,15 +28,16 @@ const Form: FC<IFormProps> = ({
 	onChange,
 	onSubmit
 }) => {
-	// const [error, setError] = useState<boolean>(false)
+	const [error, setError] = useState<boolean>(false)
 
-	// useEffect(() => {
-	// 	if (!value.includes('@')) {
-	// 		setError(true)
-	// 	} else {
-	// 		setError(false)
-	// 	}
-	// }, [value])
+	const onSubmitHandler = (event: any) => {
+		if (!value) {
+			event.preventDefault()
+			setError(true)
+		} else {
+			setError(false)
+		}
+	}
 
 	return (
 		<form className={styles.form}>
@@ -52,19 +49,11 @@ const Form: FC<IFormProps> = ({
 				onChange={onChange}
 			/>
 
-			<button className={styles.btn}>Free Trial</button>
+			{error && <div className={styles.error}>Email is a required field</div>}
 
-			{/* {!error && value && (
-				<div className={styles.icon}>
-					<Image src={successIcon} width={48} height={48} alt='success icon' />
-				</div>
-			)}
-
-			{error && value && (
-				<div className={styles.icon}>
-					<Image src={errorIcon} width={48} height={48} alt='error icon' />
-				</div>
-			)} */}
+			<button className={styles.btn} onClick={onSubmitHandler}>
+				Free Trial
+			</button>
 		</form>
 	)
 }
