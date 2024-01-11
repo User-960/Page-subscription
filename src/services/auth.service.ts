@@ -17,10 +17,9 @@ class AuthService {
 
 			if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
 
-			console.log(data)
 			return data
 		} catch (error) {
-			console.log(error)
+			throw new Error(`Mistake: ${error}`)
 		}
 	}
 
@@ -45,10 +44,9 @@ class AuthService {
 
 			if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
 
-			console.log(data)
 			return data
 		} catch (error) {
-			console.log(error)
+			throw new Error(`Mistake: ${error}`)
 		}
 	}
 }

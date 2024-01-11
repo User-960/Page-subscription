@@ -2,6 +2,8 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
+import { useAppAuthDispatch, useAuthLogged } from '../hooks/useAppAuth'
+
 import Layout from '../layout/Layout'
 import { IMeta } from '../seo/meta.interface'
 
@@ -9,8 +11,16 @@ import styles from './Auth.module.scss'
 import Login from './login/Login'
 import Register from './register/Register'
 import AuthService from '@/services/auth.service'
+import { login } from '@/store/slice/auth'
 
 const Auth: FC = (): JSX.Element => {
+	const { push, pathname } = useRouter()
+
+	const meta: IMeta = {
+		title: pathname === '/login' ? 'Login' : 'Registration',
+		description: 'Enter to account'
+	}
+
 	const [email, setEmail] = useState<string | null>(null)
 	const [password, setPassword] = useState<string | null>(null)
 
@@ -18,21 +28,24 @@ const Auth: FC = (): JSX.Element => {
 	const [firstName, setFirstName] = useState<string | null>(null)
 	const [username, setUsername] = useState<string | null>(null)
 
-	const { pathname } = useRouter()
+	const dispatch = useAppAuthDispatch()
+	const auth = useAuthLogged()
 
-	const meta: IMeta = {
-		title: pathname === '/login' ? 'Login' : 'Registration',
-		description: 'Enter to account'
-	}
+	useEffect(() => {
+		if (auth) {
+			push('/')
+		}
+	}, [auth])
 
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault()
 
 		if (pathname === '/login') {
-			const user = AuthService.loginUser(email, password)
+			const user = await AuthService.loginUser(email, password)
+			dispatch(login(user))
 		} else {
 			if (password === repeatPassword) {
-				const user = AuthService.createUser(
+				const user = await AuthService.createUser(
 					firstName,
 					username,
 					email,
