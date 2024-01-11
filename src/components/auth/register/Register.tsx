@@ -1,10 +1,24 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { Dispatch, FC } from 'react'
 
 import styles from './Register.module.scss'
 
-const Register = () => {
+interface IRegisterProps {
+	setFirstName: Dispatch<React.SetStateAction<string | null>>
+	setUsername: Dispatch<React.SetStateAction<string | null>>
+	setEmail: Dispatch<React.SetStateAction<string | null>>
+	setPassword: Dispatch<React.SetStateAction<string | null>>
+	setRepeatPassword: Dispatch<React.SetStateAction<string | null>>
+}
+
+const Register: FC<IRegisterProps> = ({
+	setFirstName,
+	setUsername,
+	setEmail,
+	setPassword,
+	setRepeatPassword
+}): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
@@ -32,9 +46,10 @@ const Register = () => {
 			<TextField
 				margin='normal'
 				fullWidth={true}
-				label='Name'
+				label='First name'
 				variant='outlined'
-				placeholder='Type your name'
+				placeholder='Type your first name'
+				onChange={e => setFirstName(e.target.value)}
 			/>
 			<TextField
 				margin='normal'
@@ -42,6 +57,7 @@ const Register = () => {
 				label='Username'
 				variant='outlined'
 				placeholder='Type your username'
+				onChange={e => setUsername(e.target.value)}
 			/>
 			<TextField
 				margin='normal'
@@ -49,6 +65,7 @@ const Register = () => {
 				label='Email'
 				variant='outlined'
 				placeholder='Type your email'
+				onChange={e => setEmail(e.target.value)}
 			/>
 			<TextField
 				type='password'
@@ -57,6 +74,7 @@ const Register = () => {
 				label='Password'
 				variant='outlined'
 				placeholder='Type your password'
+				onChange={e => setPassword(e.target.value)}
 			/>
 			<TextField
 				type='password'
@@ -65,6 +83,7 @@ const Register = () => {
 				label='Repeat password'
 				variant='outlined'
 				placeholder='Repeat your password'
+				onChange={e => setRepeatPassword(e.target.value)}
 			/>
 
 			<Button

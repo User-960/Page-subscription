@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Message, Path, UseFormRegister, ValidationRule } from 'react-hook-form'
 
 import styles from './Form.module.scss'
-import { IFormFields } from '@/interfaces/form.interface'
+import { IFormFields } from '@/interfaces/auth.interface/auth.interface'
 
 interface IFormProps {
 	placeholder: string

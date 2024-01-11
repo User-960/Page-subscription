@@ -10,21 +10,37 @@ import Login from './login/Login'
 import Register from './register/Register'
 import AuthService from '@/services/auth.service'
 
-const Auth: FC = () => {
+const Auth: FC = (): JSX.Element => {
 	const [email, setEmail] = useState<string | null>(null)
 	const [password, setPassword] = useState<string | null>(null)
+
+	const [repeatPassword, setRepeatPassword] = useState<string | null>(null)
+	const [firstName, setFirstName] = useState<string | null>(null)
+	const [username, setUsername] = useState<string | null>(null)
 
 	const { pathname } = useRouter()
 
 	const meta: IMeta = {
-		title: pathname === '/login' ? 'Логин' : 'Регистрация',
+		title: pathname === '/login' ? 'Login' : 'Registration',
 		description: 'Enter to account'
 	}
 
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault()
 
-		const user = AuthService.loginUser(email, password)
+		if (pathname === '/login') {
+			const user = AuthService.loginUser(email, password)
+		} else {
+			if (password === repeatPassword) {
+				const user = AuthService.createUser(
+					firstName,
+					username,
+					email,
+					password,
+					repeatPassword
+				)
+			}
+		}
 	}
 
 	return (
@@ -45,7 +61,13 @@ const Auth: FC = () => {
 					{pathname === '/login' ? (
 						<Login setEmail={setEmail} setPassword={setPassword} />
 					) : pathname === '/register' ? (
-						<Register />
+						<Register
+							setFirstName={setFirstName}
+							setUsername={setUsername}
+							setEmail={setEmail}
+							setPassword={setPassword}
+							setRepeatPassword={setRepeatPassword}
+						/>
 					) : null}
 				</Box>
 			</form>

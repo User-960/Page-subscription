@@ -9,7 +9,7 @@ interface ILoginProps {
 	setPassword: Dispatch<React.SetStateAction<string | null>>
 }
 
-const Login: FC<ILoginProps> = ({ setEmail, setPassword }) => {
+const Login: FC<ILoginProps> = ({ setEmail, setPassword }): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
