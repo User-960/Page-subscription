@@ -1,7 +1,7 @@
-import AuthRootComponent from '@/components/auth'
+import Auth from '@/components/auth/Auth'
 
 export const RegisterPage = () => {
-	return <AuthRootComponent />
+	return <Auth />
 }
 
 export default RegisterPage

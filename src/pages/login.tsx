@@ -1,7 +1,7 @@
-import AuthRootComponent from '@/components/auth'
+import Auth from '@/components/auth/Auth'
 
 export const LoginPage = () => {
-	return <AuthRootComponent />
+	return <Auth />
 }
 
 export default LoginPage
