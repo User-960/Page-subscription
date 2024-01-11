@@ -1,18 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap');
 
 // main colors
 $white: #faf9fa;
-$black: #0e0a0f;
-$grey: #f1f4f9;
+$black: #000000;
 
 // extra colors
-$blue: #002cfb;
-$grey-light: #faf9fa;
-$purple: #9966ff;
-$red: #f04242;
+$blue: #1900d5;
+$green: #a9ffa7;
+$green-light: #c1ef00;
+$grey: #3c3c3c;
+$grey-light: #7c7c7c;
+$red: #e8502f;
 
 // fonts
-$default-font: 'Roboto';
+$default-font-family: 'Poppins';
+$default-font-weight: 400;
 
 // shadow
 $box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
