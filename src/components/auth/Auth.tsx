@@ -19,13 +19,14 @@ const Auth: FC = () => {
 
 	return (
 		<Layout meta={meta}>
-			<div className='form'>
+			<div className={styles.form}>
 				<Box
 					display='flex'
 					justifyContent='center'
 					alignItems='center'
 					flexDirection='column'
 					maxWidth={640}
+					width={'80%'}
 					margin='auto'
 					padding={5}
 					borderRadius={5}

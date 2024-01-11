@@ -1,11 +1,14 @@
 import { Button, TextField, Typography } from '@mui/material'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import styles from './Login.module.scss'
 
 const Login = () => {
+	const { push } = useRouter()
+
 	return (
-		<div>
+		<>
 			<Typography
 				variant='h3'
 				fontFamily={'Poppins'}
@@ -23,7 +26,7 @@ const Login = () => {
 				textAlign='center'
 				marginBottom={3}
 			>
-				Введите ваш логин и пароль
+				Type your login and password
 			</Typography>
 
 			<TextField
@@ -31,20 +34,45 @@ const Login = () => {
 				fullWidth={true}
 				label='Login'
 				variant='outlined'
-				placeholder='Type your Login'
+				placeholder='Type your login'
 			/>
 			<TextField
+				type='password'
 				margin='normal'
 				fullWidth={true}
 				label='Password'
 				variant='outlined'
-				placeholder='Type your Password'
+				placeholder='Type your password'
 			/>
 
-			<Button variant='outlined' sx={{ fontFamily: 'Poppins', marginTop: 2 }}>
-				Contained
+			<Button
+				variant='outlined'
+				sx={{
+					fontFamily: 'Poppins',
+					marginTop: 2,
+					marginBottom: 1,
+					width: '60%'
+				}}
+			>
+				Sign in
 			</Button>
-		</div>
+
+			<Typography
+				variant='body1'
+				padding={3}
+				fontFamily={'Poppins'}
+				fontWeight={300}
+				textAlign='center'
+			>
+				Do not you have an account?
+				<span
+					className={styles.questionRegist}
+					onClick={() => push('/register')}
+				>
+					Registration
+				</span>
+			</Typography>
+		</>
 	)
 }
 
