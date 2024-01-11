@@ -68,6 +68,7 @@ const Register = () => {
 			/>
 
 			<Button
+				type='submit'
 				variant='outlined'
 				sx={{
 					fontFamily: 'Poppins',

@@ -1,10 +1,15 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { Dispatch, FC } from 'react'
 
 import styles from './Login.module.scss'
 
-const Login = () => {
+interface ILoginProps {
+	setEmail: Dispatch<React.SetStateAction<string | null>>
+	setPassword: Dispatch<React.SetStateAction<string | null>>
+}
+
+const Login: FC<ILoginProps> = ({ setEmail, setPassword }) => {
 	const { push } = useRouter()
 
 	return (
@@ -26,15 +31,17 @@ const Login = () => {
 				textAlign='center'
 				marginBottom={3}
 			>
-				Type your login and password
+				Type your email and password
 			</Typography>
 
 			<TextField
 				margin='normal'
 				fullWidth={true}
-				label='Login'
+				label='Email'
 				variant='outlined'
-				placeholder='Type your login'
+				placeholder='Type your email'
+				onChange={e => setEmail(e.target.value)}
+				required={true}
 			/>
 			<TextField
 				type='password'
@@ -43,9 +50,12 @@ const Login = () => {
 				label='Password'
 				variant='outlined'
 				placeholder='Type your password'
+				onChange={e => setPassword(e.target.value)}
+				required={true}
 			/>
 
 			<Button
+				type='submit'
 				variant='outlined'
 				sx={{
 					fontFamily: 'Poppins',
