@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material'
+import { FC, PropsWithChildren, useMemo, useState } from 'react'
+import { createContext } from 'react'
 
 export const tokens = (mode: string) => ({
 	...(mode === 'dark'
@@ -75,7 +77,7 @@ export const tokens = (mode: string) => ({
 			})
 })
 
-export const ThemeSettings = (mode: string) => {
+export const themeSettings: any = (mode: string) => {
 	const colors = tokens(mode)
 	return {
 		palette: {
@@ -132,4 +134,28 @@ export const ThemeSettings = (mode: string) => {
 			}
 		}
 	}
+}
+
+type TypeContext = {
+	toggleColorMode: () => void
+}
+
+export const ColorModeContext: any = createContext<TypeContext>({
+	toggleColorMode: () => {}
+})
+
+export const useMode = () => {
+	const [mode, setMode] = useState<string>('dark')
+
+	const colorMode = useMemo(
+		() => ({
+			toggleColorMode: () =>
+				setMode(prev => (prev === 'light' ? 'dark' : 'light'))
+		}),
+		[]
+	)
+
+	const theme: any = useMemo(() => createTheme(themeSettings(mode)), [mode])
+
+	return [theme, colorMode]
 }
