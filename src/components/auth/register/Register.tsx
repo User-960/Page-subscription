@@ -88,7 +88,7 @@ const Register: FC<IRegisterProps> = ({
 
 			<Button
 				type='submit'
-				variant='outlined'
+				variant='contained'
 				sx={{
 					fontFamily: 'Poppins',
 					marginTop: 2,

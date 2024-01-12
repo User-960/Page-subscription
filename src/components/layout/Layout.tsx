@@ -3,6 +3,8 @@ import { FC, Fragment, ReactNode } from 'react'
 
 import TopBar from '../ui/topBar/TopBar'
 
+import { useAuthLogged } from '../hooks/useAppAuth'
+
 import Meta from '../seo/Meta'
 import { IMeta } from '../seo/meta.interface'
 
@@ -15,19 +17,22 @@ interface ILayoutProps {
 }
 
 const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
+	const auth = useAuthLogged()
 	return (
 		<>
 			<Meta title={meta.title} description={meta.description}>
 				<div className={styles.mainWrapper}>
-					<header className={styles.header}>
-						<TopBar />
-					</header>
+					{auth && (
+						<header className={styles.header}>
+							<TopBar />
+						</header>
+					)}
 
 					<main className={styles.contentWrapper}>
 						{children && <Fragment>{children}</Fragment>}
 					</main>
 
-					<footer className={styles.footer}></footer>
+					{auth && <footer className={styles.footer}></footer>}
 				</div>
 			</Meta>
 		</>

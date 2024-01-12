@@ -56,7 +56,7 @@ const Login: FC<ILoginProps> = ({ setEmail, setPassword }): JSX.Element => {
 
 			<Button
 				type='submit'
-				variant='outlined'
+				variant='contained'
 				sx={{
 					fontFamily: 'Poppins',
 					marginTop: 2,
