@@ -17,6 +17,12 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/**/*.d.ts"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"src/**/*.d.ts",
+		"src/declaration.d.ts"
+	],
 	"exclude": ["node_modules"]
 }
