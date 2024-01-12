@@ -105,6 +105,31 @@ export const ThemeSettings = (mode: string) => {
 							light: colors.white[100]
 						}
 					})
+		},
+		typography: {
+			fontFamily: ['Poppins', 'sans-serif'].join(','),
+			fontSize: 14,
+			fontWeight: 500,
+			h1: {
+				fontFamily: ['Poppins', 'sans-serif'].join(','),
+				fontSize: 28,
+				fontWeight: 600
+			},
+			h2: {
+				fontFamily: ['Poppins', 'sans-serif'].join(','),
+				fontSize: 20,
+				fontWeight: 600
+			},
+			h3: {
+				fontFamily: ['Poppins', 'sans-serif'].join(','),
+				fontSize: 18,
+				fontWeight: 600
+			},
+			p: {
+				fontFamily: ['Poppins', 'sans-serif'].join(','),
+				fontSize: 14,
+				fontWeight: 500
+			}
 		}
 	}
 }
