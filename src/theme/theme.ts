@@ -51,7 +51,7 @@ export const tokens = (mode: string) => ({
 				},
 				primary: {
 					DEFAULT: '#FFFFFF',
-					500: '#F7F7F7'
+					600: '#F7F7F7'
 				},
 				secondary: {
 					DEFAULT: '#7C7C7C'

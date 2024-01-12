@@ -4,7 +4,7 @@ import { IAuthState } from '@/interfaces/auth.interface/auth.interface'
 
 const initialState: IAuthState = {
 	user: null,
-	isLogged: false
+	isLogged: true
 }
 
 export const authSlice = createSlice({
