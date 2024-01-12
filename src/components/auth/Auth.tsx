@@ -10,6 +10,7 @@ import { IMeta } from '../seo/meta.interface'
 import styles from './Auth.module.scss'
 import Login from './login/Login'
 import Register from './register/Register'
+import { AppErrors } from '@/common/errors/errors'
 import AuthService from '@/services/auth.service'
 import { login } from '@/store/slice/auth'
 
@@ -41,17 +42,27 @@ const Auth: FC = (): JSX.Element => {
 		e.preventDefault()
 
 		if (pathname === '/login') {
-			const user = await AuthService.loginUser(email, password)
-			dispatch(login(user))
+			try {
+				const user = await AuthService.loginUser(email, password)
+				dispatch(login(user))
+			} catch (error) {
+				console.log(e)
+			}
 		} else {
 			if (password === repeatPassword) {
-				const user = await AuthService.createUser(
-					firstName,
-					username,
-					email,
-					password,
-					repeatPassword
-				)
+				try {
+					const user = await AuthService.createUser(
+						firstName,
+						username,
+						email,
+						password,
+						repeatPassword
+					)
+				} catch (error) {
+					console.log(e)
+				}
+			} else {
+				throw new Error(AppErrors.PasswordDoNotMatch)
 			}
 		}
 	}

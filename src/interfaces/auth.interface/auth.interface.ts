@@ -26,3 +26,8 @@ export interface IWatchlist {
 	updatedAt: string
 	user: number
 }
+
+export interface IAuthState {
+	user: IUserResponse | null
+	isLogged: boolean
+}

@@ -9,18 +9,14 @@ class AuthService {
 	private URL_REGISTER = '/auth/register'
 
 	async loginUser(email: string | null, password: string | null) {
-		try {
-			const { data } = await $axios.post<IUserResponse>(`${this.URL_LOGIN}`, {
-				email,
-				password
-			})
+		const { data } = await $axios.post<IUserResponse>(`${this.URL_LOGIN}`, {
+			email,
+			password
+		})
 
-			if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
+		if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
 
-			return data
-		} catch (error) {
-			throw new Error(`Mistake: ${error}`)
-		}
+		return data
 	}
 
 	async createUser(
@@ -30,24 +26,17 @@ class AuthService {
 		password: string | null,
 		repeatPassword: string | null
 	) {
-		try {
-			const { data } = await $axios.post<IUserResponse>(
-				`${this.URL_REGISTER}`,
-				{
-					firstName,
-					username,
-					email,
-					password,
-					repeatPassword
-				}
-			)
+		const { data } = await $axios.post<IUserResponse>(`${this.URL_REGISTER}`, {
+			firstName,
+			username,
+			email,
+			password,
+			repeatPassword
+		})
 
-			if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
+		if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
 
-			return data
-		} catch (error) {
-			throw new Error(`Mistake: ${error}`)
-		}
+		return data
 	}
 }
 
