@@ -45,19 +45,22 @@ const Auth: FC = (): JSX.Element => {
 			try {
 				const user = await AuthService.loginUser(email, password)
 				dispatch(login(user))
+				push('/')
 			} catch (error) {
 				console.log(e)
 			}
 		} else {
 			if (password === repeatPassword) {
 				try {
-					const user = await AuthService.createUser(
+					const newUser = await AuthService.createUser(
 						firstName,
 						username,
 						email,
 						password,
 						repeatPassword
 					)
+					dispatch(login(newUser))
+					push('/')
 				} catch (error) {
 					console.log(e)
 				}
