@@ -15,16 +15,17 @@ import {
 	Typography,
 	useTheme
 } from '@mui/material'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
 import { useColorMode } from '@/components/hooks/useColorMode'
 
+import Logo from '../../../assets/images/SideBar/logo.svg'
+
 import styles from './SideBar.module.scss'
 import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
 import { tokens } from '@/theme/theme'
-
-const cn = require('clsx')
 
 interface ISideBarProps {
 	isNoneMobile: boolean
@@ -70,8 +71,23 @@ const SideBar: FC<ISideBarProps> = ({
 				>
 					<Box width='100%'>
 						<div className={styles.container}>
-							<Box display='flex' alignItems='center' gap='10px'>
-								<Typography>Crypto</Typography>
+							<Box
+								display='flex'
+								alignItems='center'
+								gap='10px'
+								padding='30px 15px'
+							>
+								<Image src={Logo} alt='logo' />
+								<Typography
+									variant='h1'
+									color={
+										theme.palette.mode === 'light'
+											? colors.black.DEFAULT
+											: colors.white.DEFAULT
+									}
+								>
+									Crypto
+								</Typography>
 								{!isNoneMobile && (
 									<IconButton onClick={() => setIsOpen(!isOpen)}>
 										<ChevronLeftOutlinedIcon />
@@ -84,9 +100,7 @@ const SideBar: FC<ISideBarProps> = ({
 							{navMenu.map((item: INavMenuItem) => (
 								<ListItem key={item.id}>
 									<ListItemButton onClick={() => push(item.path)}>
-                    <ListItemIcon>
-                      {item.icon}
-                    </ListItemIcon>
+										<ListItemIcon>{item.icon}</ListItemIcon>
 										<ListItemText>
 											<Typography>{item.name}</Typography>
 										</ListItemText>
