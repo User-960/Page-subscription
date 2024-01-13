@@ -5,7 +5,6 @@ import {
 	Box,
 	Divider,
 	Drawer,
-	Grid,
 	IconButton,
 	List,
 	ListItem,
@@ -19,13 +18,13 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
-import { useColorMode } from '@/components/hooks/useColorMode'
-
 import Logo from '../../../assets/images/SideBar/logo.svg'
 
 import styles from './SideBar.module.scss'
 import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
 import { tokens } from '@/theme/theme'
+
+const cn = require('clsx')
 
 interface ISideBarProps {
 	isNoneMobile: boolean
@@ -42,7 +41,6 @@ const SideBar: FC<ISideBarProps> = ({
 }): JSX.Element => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
-	const colorMode: any = useColorMode()
 
 	const [active, setActive] = useState<string>('')
 	const { pathname, push } = useRouter()
@@ -65,15 +63,14 @@ const SideBar: FC<ISideBarProps> = ({
 							color: theme.palette.secondary.main,
 							backgroundColor: theme.palette.primary.main,
 							boxSizing: 'border-box',
-							width: drawerWidth
+							width: drawerWidth,
+							borderRight: `1px solid ${colors.borderColor}`
 						}
 					}}
 				>
 					<Box
-						width='100%'
-						sx={{
-							borderBottom: `1px solid ${colors.borderColor}`
-						}}
+						className={styles.navBlock}
+						sx={{ borderBottom: `1px solid ${colors.borderColor}` }}
 					>
 						<div className={styles.container}>
 							<Box className={styles.brand} onClick={() => push('/')}>
@@ -96,18 +93,18 @@ const SideBar: FC<ISideBarProps> = ({
 							</Box>
 						</div>
 
-						<List
-							sx={{
-								marginBottom: '55px'
-							}}
-						>
+						<List className={styles.list}>
 							{navMenu.map((item: INavMenuItem) => (
 								<ListItem key={item.id}>
 									<ListItemButton
-										className={styles.navItemBtn}
+										className={cn(styles.navItemBtn, {
+											[styles.navItemBtnActive]: pathname === item.path
+										})}
 										onClick={() => push(item.path)}
 									>
-										<ListItemIcon>{item.icon}</ListItemIcon>
+										<ListItemIcon className={styles.iconNavItem}>
+											{item.icon}
+										</ListItemIcon>
 										<ListItemText>
 											<Typography>{item.name}</Typography>
 										</ListItemText>
@@ -117,7 +114,7 @@ const SideBar: FC<ISideBarProps> = ({
 						</List>
 					</Box>
 
-					<Box width='100%'>
+					<Box className={styles.logoutBlock}>
 						<List>
 							<ListItem>
 								<ListItemButton

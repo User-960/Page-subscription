@@ -6,6 +6,11 @@
 	align-items: center;
 }
 
+.navBlock,
+.logoutBlock {
+	width: 100%;
+}
+
 .brand {
 	display: flex;
 	align-items: center;
@@ -14,11 +19,27 @@
 	cursor: pointer;
 }
 
-.navItemBtn {
-	border-radius: 4px;
+.list {
+	margin-bottom: 55px;
 }
 
-.navItemBtn:hover {
-	color: #ffffff;
-	background-color: #1900d5;
+.navItemBtn {
+	border-radius: 4px;
+	&:hover {
+		color: $white;
+		background-color: $blue;
+
+		& .iconNavItem {
+			color: $white;
+		}
+	}
+}
+
+.navItemBtnActive {
+	color: $white;
+	background-color: $blue;
+
+	& .iconNavItem {
+		color: $white;
+	}
 }

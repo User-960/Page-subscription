@@ -30,8 +30,7 @@ const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
 						<>
 							<Box
 								display={isNoneMobile ? 'flex' : 'block'}
-								width='100%'
-								height='100%'
+								className={styles.container}
 							>
 								<SideBar
 									isNoneMobile={isNoneMobile}

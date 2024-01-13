@@ -11,31 +11,30 @@ import { useColorMode } from '@/components/hooks/useColorMode'
 import styles from './TopBar.module.scss'
 import { tokens } from '@/theme/theme'
 
-const cn = require('clsx')
-
 const TopBar = (): JSX.Element => {
-	const user = useAppAuthSelector(state => state.auth.user)
+	const userData = useAppAuthSelector(state => state.auth.userData)
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()
 
 	return (
 		<Box
-			display='flex'
-			justifyContent='space-between'
-			alignItems='center'
-			px='32px'
-			py='24px'
+			className={styles.container}
+			sx={{
+				backgroundColor: colors.primary.DEFAULT,
+				borderBottom: `1px solid ${colors.borderColor}`
+			}}
 		>
-			<Grid>Welcome, {user?.user.firstName}</Grid>
-			<Box display='flex' alignItems='center'>
+			<Grid>Welcome, {userData?.user.firstName}</Grid>
+			<Box className={styles.panelBlock}>
 				<Grid
-					sx={{
-						pr: '37px',
-						borderRight: `1px solid ${colors.gray.DEFAULT}`
-					}}
+					className={styles.panelBlockInner}
+					sx={{ borderRight: `1px solid ${colors.borderColor}` }}
 				>
-					<IconButton sx={{ mr: '20px' }} onClick={colorMode.toggleColorMode}>
+					<IconButton
+						className={styles.iconTheme}
+						onClick={colorMode.toggleColorMode}
+					>
 						{theme.palette.mode === 'dark' ? (
 							<DarkModeIcon />
 						) : (
@@ -49,17 +48,13 @@ const TopBar = (): JSX.Element => {
 				</Grid>
 
 				<Grid
-					sx={{
-						display: 'flex',
-						backgroundColor: `${colors.primary[600]}`,
-						borderRadius: '8px',
-						ml: '28px'
-					}}
+					className={styles.searchBlock}
+					sx={{ backgroundColor: `${colors.primary[600]}` }}
 				>
 					<IconButton className={styles.iconSearch}>
 						<SearchIcon />
 					</IconButton>
-					<InputBase sx={{ px: '18px', py: '12px' }} placeholder='Search' />
+					<InputBase className={styles.input} placeholder='Search' />
 				</Grid>
 			</Box>
 		</Box>

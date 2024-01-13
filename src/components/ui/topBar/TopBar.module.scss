@@ -1,7 +1,38 @@
 @import 'src/assets/styles/variables';
 
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 32px 24px;
+	max-height: 96px;
+}
+
+.panelBlock {
+	display: flex;
+	align-items: center;
+}
+
+.panelBlockInner {
+	padding-right: 37px;
+}
+
+.iconTheme {
+	margin-right: 20px;
+}
+
+.searchBlock {
+	display: flex;
+	border-radius: 8px;
+	margin-left: 28px;
+}
+
 .iconSearch {
-  &:hover {
-    background-color: transparent;
-  }
+	&:hover {
+		background-color: transparent;
+	}
+}
+
+.input {
+	padding: 12px 18px;
 }

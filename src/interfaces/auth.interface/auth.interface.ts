@@ -28,6 +28,6 @@ export interface IWatchlist {
 }
 
 export interface IAuthState {
-	user: IUserResponse | null
+	userData: IUserResponse | null
 	isLogged: boolean
 }

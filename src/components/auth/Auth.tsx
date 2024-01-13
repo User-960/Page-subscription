@@ -73,18 +73,7 @@ const Auth: FC = (): JSX.Element => {
 	return (
 		<Layout meta={meta}>
 			<form className={styles.form} onSubmit={handleSubmit}>
-				<Box
-					display='flex'
-					justifyContent='center'
-					alignItems='center'
-					flexDirection='column'
-					maxWidth={640}
-					width={'80%'}
-					margin='auto'
-					padding={5}
-					borderRadius={5}
-					boxShadow={'5px 5px 10px #ccc'}
-				>
+				<Box className={styles.container} padding={5} borderRadius={5}>
 					{pathname === '/login' ? (
 						<Login setEmail={setEmail} setPassword={setPassword} />
 					) : pathname === '/register' ? (
