@@ -30,13 +30,12 @@ const TopBar = (): JSX.Element => {
 			<Grid>Welcome, {user?.user.firstName}</Grid>
 			<Box display='flex' alignItems='center'>
 				<Grid
-					onClick={colorMode.toggleColorMode}
 					sx={{
 						pr: '37px',
 						borderRight: `1px solid ${colors.gray.DEFAULT}`
 					}}
 				>
-					<IconButton sx={{ mr: '20px' }}>
+					<IconButton sx={{ mr: '20px' }} onClick={colorMode.toggleColorMode}>
 						{theme.palette.mode === 'dark' ? (
 							<DarkModeIcon />
 						) : (
