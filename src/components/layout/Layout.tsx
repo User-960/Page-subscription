@@ -40,7 +40,7 @@ const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
 								/>
 								<Box className={styles.mainSection}>
 									<header className={styles.header}>
-										<TopBar />
+										<TopBar isOpen={isOpen} setIsOpen={setIsOpen} />
 									</header>
 
 									<main className={styles.contentWrapper}>
