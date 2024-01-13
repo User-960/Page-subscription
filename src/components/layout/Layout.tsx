@@ -35,11 +35,11 @@ const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
 							>
 								<SideBar
 									isNoneMobile={isNoneMobile}
-									drawerWidth='250'
+									drawerWidth='250px'
 									isOpen={isOpen}
 									setIsOpen={setIsOpen}
 								/>
-								<Box>
+								<Box className={styles.mainSection}>
 									<header className={styles.header}>
 										<TopBar />
 									</header>

@@ -1,10 +1,6 @@
-import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined'
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined'
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import {
 	Box,
 	Divider,
@@ -25,6 +21,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useColorMode } from '@/components/hooks/useColorMode'
 
 import styles from './SideBar.module.scss'
+import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
 import { tokens } from '@/theme/theme'
 
 const cn = require('clsx')
@@ -47,7 +44,7 @@ const SideBar: FC<ISideBarProps> = ({
 	const colorMode: any = useColorMode()
 
 	const [active, setActive] = useState<string>('')
-	const { pathname } = useRouter()
+	const { pathname, push } = useRouter()
 
 	useEffect(() => {
 		setActive(pathname.substring(1))
@@ -82,6 +79,21 @@ const SideBar: FC<ISideBarProps> = ({
 								)}
 							</Box>
 						</div>
+
+						<List>
+							{navMenu.map((item: INavMenuItem) => (
+								<ListItem key={item.id}>
+									<ListItemButton onClick={() => push(item.path)}>
+                    <ListItemIcon>
+                      {item.icon}
+                    </ListItemIcon>
+										<ListItemText>
+											<Typography>{item.name}</Typography>
+										</ListItemText>
+									</ListItemButton>
+								</ListItem>
+							))}
+						</List>
 					</Box>
 				</Drawer>
 			)}
