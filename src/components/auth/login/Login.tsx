@@ -1,15 +1,19 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import React, { Dispatch, FC } from 'react'
+import React, { FC } from 'react'
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 import styles from './Login.module.scss'
 
-interface ILoginProps {
-	setEmail: Dispatch<React.SetStateAction<string | null>>
-	setPassword: Dispatch<React.SetStateAction<string | null>>
+interface ILoginProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TContext = any
+> {
+	register: UseFormRegister<TFieldValues>
+	errors: FieldErrors<FieldValues>
 }
 
-const Login: FC<ILoginProps> = ({ setEmail, setPassword }): JSX.Element => {
+const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
@@ -35,23 +39,30 @@ const Login: FC<ILoginProps> = ({ setEmail, setPassword }): JSX.Element => {
 			</Typography>
 
 			<TextField
+				error={!!errors.email}
+				helperText={errors.email ? `${errors.email.message}` : ''}
 				margin='normal'
 				fullWidth={true}
 				label='Email'
 				variant='outlined'
 				placeholder='Type your email'
-				onChange={e => setEmail(e.target.value)}
-				required={true}
+				{...register('email', {
+					required: 'It is required field!'
+				})}
 			/>
 			<TextField
+				error={!!errors.password}
+				helperText={errors.password ? `${errors.password.message}` : ''}
 				type='password'
 				margin='normal'
 				fullWidth={true}
 				label='Password'
 				variant='outlined'
 				placeholder='Type your password'
-				onChange={e => setPassword(e.target.value)}
-				required={true}
+				{...register('password', {
+					required: 'It is required field!',
+					minLength: 6
+				})}
 			/>
 
 			<Button
