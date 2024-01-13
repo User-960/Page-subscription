@@ -14,7 +14,7 @@ import Login from './login/Login'
 import Register from './register/Register'
 import { AppErrors } from '@/common/errors/errors'
 import AuthService from '@/services/auth.service'
-import { login } from '@/store/slice/auth'
+import { login } from '@/store/slice/auth/authSlice'
 import { loginSchema, registerSchema } from '@/utils/authSchema/authSchema'
 
 const Auth: FC = (): JSX.Element => {
@@ -75,7 +75,7 @@ const Auth: FC = (): JSX.Element => {
 	return (
 		<Layout meta={meta}>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
-				<Box className={styles.container} padding={5} borderRadius={5}>
+				<Box className={styles.container} padding={4} borderRadius={5}>
 					{pathname === '/login' ? (
 						<Login register={register} errors={errors} />
 					) : pathname === '/register' ? (

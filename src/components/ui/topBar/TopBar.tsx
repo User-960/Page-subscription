@@ -23,7 +23,7 @@ import { tokens } from '@/theme/theme'
 
 interface ITopBarProps {
 	isOpen: boolean
-	setIsOpen: any
+	setIsOpen: (value: boolean) => void
 }
 
 const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
@@ -42,17 +42,19 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 		>
 			<Toolbar className={styles.toolBar}>
 				<Box className={styles.container}>
-					<IconButton>
-						<MenuOutlinedIcon
-							className={styles.menuIcon}
-							onClick={() => setIsOpen(!isOpen)}
-						/>
+					<IconButton onClick={() => setIsOpen(!isOpen)}>
+						<MenuOutlinedIcon className={styles.menuIcon} />
 					</IconButton>
 					<Grid className={styles.nameBlock}>
 						<Typography variant='h3'>
 							Welcome, {userData?.user.firstName}
 						</Typography>
-						<Typography>1 Oct. 2017 year</Typography>
+						<Typography
+							className={styles.dataText}
+							sx={{ color: `${theme.palette.secondary.main}` }}
+						>
+							1 Oct. 2017 year
+						</Typography>
 					</Grid>
 				</Box>
 				<Box className={styles.panelBlock}>

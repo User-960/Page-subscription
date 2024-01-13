@@ -9,7 +9,7 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
 	title,
 	description,
 	children
-}) => {
+}): JSX.Element => {
 	return (
 		<>
 			<Head>

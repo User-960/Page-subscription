@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import Layout from '@/components/layout/Layout'
 import { IMeta } from '@/components/seo/meta.interface'
 
 import styles from './Home.module.scss'
 
-const Home = () => {
+const Home: FC = (): JSX.Element => {
 	const meta: IMeta = {
 		title: 'Home',
 		description: 'Home page'

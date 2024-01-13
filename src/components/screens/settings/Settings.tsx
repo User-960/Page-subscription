@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react'
 
+import Layout from '@/components/layout/Layout'
+import { IMeta } from '@/components/seo/meta.interface'
 
-
-import Layout from '@/components/layout/Layout';
-import { IMeta } from '@/components/seo/meta.interface';
-
-
-const Settings = (): JSX.Element => {
+const Settings: FC = (): JSX.Element => {
 	const meta: IMeta = {
 		title: 'Settings',
 		description: 'Settings page'

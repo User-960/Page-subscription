@@ -17,8 +17,12 @@ interface ILayoutProps {
 	meta: IMeta
 }
 
-const Layout: FC<ILayoutProps> = ({ backLink = '/', children, meta }) => {
-	const isNoneMobile = useMediaQuery('(min-width:600px)')
+const Layout: FC<ILayoutProps> = ({
+	backLink = '/',
+	children,
+	meta
+}): JSX.Element => {
+	const isNoneMobile = useMediaQuery('(min-width:720px)')
 	const auth = useAuthLogged()
 	const [isOpen, setIsOpen] = useState<boolean>(true)
 

@@ -1,9 +1,7 @@
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined'
-import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import {
 	Box,
-	Divider,
 	Drawer,
 	IconButton,
 	List,
@@ -18,19 +16,22 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
+import { useAppAuthDispatch } from '../../hooks/useAppAuth'
+
 import Logo from '../../../assets/images/SideBar/logo.svg'
 
 import styles from './SideBar.module.scss'
 import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
+import { logout } from '@/store/slice/auth/authSlice'
 import { tokens } from '@/theme/theme'
 
 const cn = require('clsx')
 
 interface ISideBarProps {
 	isNoneMobile: boolean
-	drawerWidth: any
+	drawerWidth: string
 	isOpen: boolean
-	setIsOpen: any
+	setIsOpen: (value: boolean) => void
 }
 
 const SideBar: FC<ISideBarProps> = ({
@@ -44,6 +45,13 @@ const SideBar: FC<ISideBarProps> = ({
 
 	const [active, setActive] = useState<string>('')
 	const { pathname, push } = useRouter()
+
+	const dispatch = useAppAuthDispatch()
+
+	const logOutFunc = () => {
+		dispatch(logout())
+		push('/login')
+	}
 
 	useEffect(() => {
 		setActive(pathname.substring(1))
@@ -119,7 +127,7 @@ const SideBar: FC<ISideBarProps> = ({
 							<ListItem>
 								<ListItemButton
 									className={styles.navItemBtn}
-									onClick={() => push('')}
+									onClick={() => logOutFunc()}
 								>
 									<ListItemIcon>
 										<LogoutOutlinedIcon />
