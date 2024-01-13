@@ -4,7 +4,7 @@ import { IAuthState } from '@/interfaces/auth.interface/auth.interface'
 
 const initialState: IAuthState = {
 	userData: null,
-	isLogged: false
+	isLogged: true
 }
 
 export const authSlice = createSlice({
@@ -14,9 +14,13 @@ export const authSlice = createSlice({
 		login(state: IAuthState, action) {
 			state.userData = action.payload
 			state.isLogged = true
+		},
+		logout(state: IAuthState) {
+			state.userData = null
+			state.isLogged = false
 		}
 	}
 })
 
-export const { login } = authSlice.actions
+export const { login, logout } = authSlice.actions
 export default authSlice.reducer

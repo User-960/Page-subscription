@@ -140,7 +140,7 @@ type TypeContext = {
 	toggleColorMode: () => void
 }
 
-export const ColorModeContext: any = createContext<TypeContext>({
+export const ColorModeContext = createContext<TypeContext>({
 	toggleColorMode: () => {}
 })
 

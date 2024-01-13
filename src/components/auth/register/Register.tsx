@@ -9,7 +9,7 @@ interface IRegisterProps<
 	TFieldValues extends FieldValues = FieldValues,
 	TContext = any
 > {
-	register: UseFormRegister<TFieldValues>
+	register: UseFormRegister<TFieldValues | any>
 	errors: FieldErrors<FieldValues>
 }
 
@@ -20,7 +20,7 @@ const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 		<>
 			<Typography
 				variant='h3'
-				fontFamily={'Poppins'}
+				fontSize={32}
 				fontWeight={700}
 				textAlign='center'
 			>
@@ -30,7 +30,6 @@ const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 			<Typography
 				variant='body1'
 				padding={3}
-				fontFamily={'Poppins'}
 				fontWeight={300}
 				textAlign='center'
 				marginBottom={2}
@@ -97,10 +96,10 @@ const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 				type='submit'
 				variant='contained'
 				sx={{
-					fontFamily: 'Poppins',
 					marginTop: 2,
 					marginBottom: 1,
-					width: '60%'
+					width: '60%',
+					backgroundColor: '#1900d5 !important'
 				}}
 			>
 				Register

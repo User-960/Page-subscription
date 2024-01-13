@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import Layout from '@/components/layout/Layout'
 import { IMeta } from '@/components/seo/meta.interface'
 
-const News = (): JSX.Element => {
+const News: FC = (): JSX.Element => {
 	const meta: IMeta = {
 		title: 'News',
 		description: 'News page'
