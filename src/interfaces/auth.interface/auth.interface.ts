@@ -1,6 +1,14 @@
-export interface IAuthFormFields {
+export interface IAuthFormFieldsLogin {
 	email: string
 	password: string
+}
+
+export interface IAuthFormFieldsRegister {
+	firstName: string
+	username: string
+	email: string
+	password: string
+	repeatPassword: string
 }
 
 export interface IUserResponse {

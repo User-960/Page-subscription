@@ -13,8 +13,10 @@ import styles from './Auth.module.scss'
 import Login from './login/Login'
 import Register from './register/Register'
 import { AppErrors } from '@/common/errors/errors'
-import AuthService from '@/services/auth.service'
-import { login } from '@/store/slice/auth/authSlice'
+import {
+	loginUserThunk,
+	registerUserThunk
+} from '@/store/thunks/authThunk/authThunk'
 import { loginSchema, registerSchema } from '@/utils/authSchema/authSchema'
 
 const Auth: FC = (): JSX.Element => {
@@ -24,6 +26,8 @@ const Auth: FC = (): JSX.Element => {
 		title: pathname === '/login' ? 'Login' : 'Registration',
 		description: 'Enter to account'
 	}
+
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const dispatch = useAppAuthDispatch()
 	const auth = useAuthLogged()
@@ -43,27 +47,31 @@ const Auth: FC = (): JSX.Element => {
 	}, [auth])
 
 	const handleSubmitForm = async (data: any) => {
+		setIsLoading(true)
 		if (pathname === '/login') {
 			try {
-				const user = await AuthService.loginUser(data.email, data.password)
-				dispatch(login(user))
+				dispatch(loginUserThunk(data))
+				setIsLoading(false)
 				push('/')
 			} catch (error) {
+				setIsLoading(false)
 				console.log(error)
 			}
 		} else {
 			if (data.password === data.repeatPassword) {
 				try {
-					const newUser = await AuthService.createUser(
-						data.firstName,
-						data.username,
-						data.email,
-						data.password,
-						data.repeatPassword
-					)
-					dispatch(login(newUser))
+					const newUser = {
+						firstName: data.firstName,
+						username: data.username,
+						email: data.email,
+						password: data.password,
+						repeatPassword: data.repeatPassword
+					}
+					dispatch(registerUserThunk(newUser))
+					setIsLoading(false)
 					push('/')
 				} catch (error) {
+					setIsLoading(false)
 					console.log(error)
 				}
 			} else {
@@ -77,9 +85,13 @@ const Auth: FC = (): JSX.Element => {
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
 				<Box className={styles.container} padding={4} borderRadius={5}>
 					{pathname === '/login' ? (
-						<Login register={register} errors={errors} />
+						<Login register={register} errors={errors} isLoading={isLoading} />
 					) : pathname === '/register' ? (
-						<Register register={register} errors={errors} />
+						<Register
+							register={register}
+							errors={errors}
+							isLoading={isLoading}
+						/>
 					) : null}
 				</Box>
 			</form>
