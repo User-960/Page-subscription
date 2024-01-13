@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { useAppAuthDispatch, useAuthLogged } from '../hooks/useAppAuth'
 
@@ -32,22 +33,26 @@ const Auth: FC = (): JSX.Element => {
 	const dispatch = useAppAuthDispatch()
 	const auth = useAuthLogged()
 
+	const {
+		register,
+		formState: { errors },
+		handleSubmit
+	} = useForm()
+
 	useEffect(() => {
 		if (auth) {
 			push('/')
 		}
 	}, [auth])
 
-	const handleSubmit = async (e: { preventDefault: () => void }) => {
-		e.preventDefault()
-
+	const handleSubmitForm = async (data: any) => {
 		if (pathname === '/login') {
 			try {
-				const user = await AuthService.loginUser(email, password)
+				const user = await AuthService.loginUser(data.email, data.password)
 				dispatch(login(user))
 				push('/')
 			} catch (error) {
-				console.log(e)
+				console.log(error)
 			}
 		} else {
 			if (password === repeatPassword) {
@@ -62,7 +67,7 @@ const Auth: FC = (): JSX.Element => {
 					dispatch(login(newUser))
 					push('/')
 				} catch (error) {
-					console.log(e)
+					console.log(error)
 				}
 			} else {
 				throw new Error(AppErrors.PasswordDoNotMatch)
@@ -72,10 +77,10 @@ const Auth: FC = (): JSX.Element => {
 
 	return (
 		<Layout meta={meta}>
-			<form className={styles.form} onSubmit={handleSubmit}>
+			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
 				<Box className={styles.container} padding={5} borderRadius={5}>
 					{pathname === '/login' ? (
-						<Login setEmail={setEmail} setPassword={setPassword} />
+						<Login register={register} errors={errors} />
 					) : pathname === '/register' ? (
 						<Register
 							setFirstName={setFirstName}
