@@ -33,46 +33,6 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 	const colorMode: any = useColorMode()
 
 	return (
-		// <Box
-		// 	className={styles.container}
-		// 	sx={{
-		// 		backgroundColor: colors.primary.DEFAULT,
-		// 		borderBottom: `1px solid ${colors.borderColor}`
-		// 	}}
-		// >
-		// 	<Grid>Welcome, {userData?.user.firstName}</Grid>
-		// 	<Box className={styles.panelBlock}>
-		// 		<Grid
-		// 			className={styles.panelBlockInner}
-		// 			sx={{ borderRight: `1px solid ${colors.borderColor}` }}
-		// 		>
-		// 			<IconButton
-		// 				className={styles.iconTheme}
-		// 				onClick={colorMode.toggleColorMode}
-		// 			>
-		// 				{theme.palette.mode === 'dark' ? (
-		// 					<DarkModeIcon />
-		// 				) : (
-		// 					<LightModeIcon />
-		// 				)}
-		// 			</IconButton>
-
-		// 			<IconButton>
-		// 				<NotificationsNoneIcon />
-		// 			</IconButton>
-		// 		</Grid>
-
-		// 		<Grid
-		// 			className={styles.searchBlock}
-		// 			sx={{ backgroundColor: `${colors.primary[600]}` }}
-		// 		>
-		// 			<IconButton className={styles.iconSearch}>
-		// 				<SearchIcon />
-		// 			</IconButton>
-		// 			<InputBase className={styles.input} placeholder='Search' />
-		// 		</Grid>
-		// 	</Box>
-		// </Box>
 		<AppBar
 			className={styles.appBar}
 			sx={{
