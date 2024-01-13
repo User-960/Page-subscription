@@ -1,24 +1,19 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { Dispatch, FC } from 'react'
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 import styles from './Register.module.scss'
 
-interface IRegisterProps {
-	setFirstName: Dispatch<React.SetStateAction<string | null>>
-	setUsername: Dispatch<React.SetStateAction<string | null>>
-	setEmail: Dispatch<React.SetStateAction<string | null>>
-	setPassword: Dispatch<React.SetStateAction<string | null>>
-	setRepeatPassword: Dispatch<React.SetStateAction<string | null>>
+interface IRegisterProps<
+	TFieldValues extends FieldValues = FieldValues,
+	TContext = any
+> {
+	register: UseFormRegister<TFieldValues>
+	errors: FieldErrors<FieldValues>
 }
 
-const Register: FC<IRegisterProps> = ({
-	setFirstName,
-	setUsername,
-	setEmail,
-	setPassword,
-	setRepeatPassword
-}): JSX.Element => {
+const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
@@ -38,52 +33,64 @@ const Register: FC<IRegisterProps> = ({
 				fontFamily={'Poppins'}
 				fontWeight={300}
 				textAlign='center'
-				marginBottom={3}
+				marginBottom={2}
 			>
 				Enter your registration details
 			</Typography>
 
 			<TextField
+				error={!!errors.firstName}
+				helperText={errors.firstName ? `${errors.firstName.message}` : ''}
 				margin='normal'
 				fullWidth={true}
 				label='First name'
 				variant='outlined'
 				placeholder='Type your first name'
-				onChange={e => setFirstName(e.target.value)}
+				{...register('firstName')}
 			/>
 			<TextField
+				error={!!errors.username}
+				helperText={errors.username ? `${errors.username.message}` : ''}
 				margin='normal'
 				fullWidth={true}
 				label='Username'
 				variant='outlined'
 				placeholder='Type your username'
-				onChange={e => setUsername(e.target.value)}
+				{...register('username')}
 			/>
 			<TextField
+				error={!!errors.email}
+				helperText={errors.email ? `${errors.email.message}` : ''}
 				margin='normal'
 				fullWidth={true}
 				label='Email'
 				variant='outlined'
 				placeholder='Type your email'
-				onChange={e => setEmail(e.target.value)}
+				{...register('email')}
 			/>
 			<TextField
+				error={!!errors.password}
+				helperText={errors.password ? `${errors.password.message}` : ''}
 				type='password'
 				margin='normal'
 				fullWidth={true}
 				label='Password'
 				variant='outlined'
 				placeholder='Type your password'
-				onChange={e => setPassword(e.target.value)}
+				{...register('password')}
 			/>
 			<TextField
+				error={!!errors.repeatPassword}
+				helperText={
+					errors.repeatPassword ? `${errors.repeatPassword.message}` : ''
+				}
 				type='password'
 				margin='normal'
 				fullWidth={true}
 				label='Repeat password'
 				variant='outlined'
 				placeholder='Repeat your password'
-				onChange={e => setRepeatPassword(e.target.value)}
+				{...register('repeatPassword')}
 			/>
 
 			<Button

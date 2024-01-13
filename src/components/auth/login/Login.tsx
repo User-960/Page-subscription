@@ -46,9 +46,7 @@ const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
 				label='Email'
 				variant='outlined'
 				placeholder='Type your email'
-				{...register('email', {
-					required: 'It is required field!'
-				})}
+				{...register('email')}
 			/>
 			<TextField
 				error={!!errors.password}
@@ -59,10 +57,7 @@ const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
 				label='Password'
 				variant='outlined'
 				placeholder='Type your password'
-				{...register('password', {
-					required: 'It is required field!',
-					minLength: 6
-				})}
+				{...register('password')}
 			/>
 
 			<Button

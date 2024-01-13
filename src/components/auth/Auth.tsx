@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
@@ -14,6 +15,7 @@ import Register from './register/Register'
 import { AppErrors } from '@/common/errors/errors'
 import AuthService from '@/services/auth.service'
 import { login } from '@/store/slice/auth'
+import { loginSchema, registerSchema } from '@/utils/authSchema/authSchema'
 
 const Auth: FC = (): JSX.Element => {
 	const { push, pathname } = useRouter()
@@ -23,13 +25,6 @@ const Auth: FC = (): JSX.Element => {
 		description: 'Enter to account'
 	}
 
-	const [email, setEmail] = useState<string | null>(null)
-	const [password, setPassword] = useState<string | null>(null)
-
-	const [repeatPassword, setRepeatPassword] = useState<string | null>(null)
-	const [firstName, setFirstName] = useState<string | null>(null)
-	const [username, setUsername] = useState<string | null>(null)
-
 	const dispatch = useAppAuthDispatch()
 	const auth = useAuthLogged()
 
@@ -37,7 +32,9 @@ const Auth: FC = (): JSX.Element => {
 		register,
 		formState: { errors },
 		handleSubmit
-	} = useForm()
+	} = useForm({
+		resolver: yupResolver(pathname === '/login' ? loginSchema : registerSchema)
+	})
 
 	useEffect(() => {
 		if (auth) {
@@ -55,14 +52,14 @@ const Auth: FC = (): JSX.Element => {
 				console.log(error)
 			}
 		} else {
-			if (password === repeatPassword) {
+			if (data.password === data.repeatPassword) {
 				try {
 					const newUser = await AuthService.createUser(
-						firstName,
-						username,
-						email,
-						password,
-						repeatPassword
+						data.firstName,
+						data.username,
+						data.email,
+						data.password,
+						data.repeatPassword
 					)
 					dispatch(login(newUser))
 					push('/')
@@ -82,13 +79,7 @@ const Auth: FC = (): JSX.Element => {
 					{pathname === '/login' ? (
 						<Login register={register} errors={errors} />
 					) : pathname === '/register' ? (
-						<Register
-							setFirstName={setFirstName}
-							setUsername={setUsername}
-							setEmail={setEmail}
-							setPassword={setPassword}
-							setRepeatPassword={setRepeatPassword}
-						/>
+						<Register register={register} errors={errors} />
 					) : null}
 				</Box>
 			</form>
