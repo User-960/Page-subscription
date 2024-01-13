@@ -5,3 +5,20 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 30px 15px;
+	cursor: pointer;
+}
+
+.navItemBtn {
+	border-radius: 4px;
+}
+
+.navItemBtn:hover {
+	color: #ffffff;
+	background-color: #1900d5;
+}

@@ -69,14 +69,14 @@ const SideBar: FC<ISideBarProps> = ({
 						}
 					}}
 				>
-					<Box width='100%'>
+					<Box
+						width='100%'
+						sx={{
+							borderBottom: `1px solid ${colors.borderColor}`
+						}}
+					>
 						<div className={styles.container}>
-							<Box
-								display='flex'
-								alignItems='center'
-								gap='10px'
-								padding='30px 15px'
-							>
+							<Box className={styles.brand} onClick={() => push('/')}>
 								<Image src={Logo} alt='logo' />
 								<Typography
 									variant='h1'
@@ -96,10 +96,17 @@ const SideBar: FC<ISideBarProps> = ({
 							</Box>
 						</div>
 
-						<List>
+						<List
+							sx={{
+								marginBottom: '55px'
+							}}
+						>
 							{navMenu.map((item: INavMenuItem) => (
 								<ListItem key={item.id}>
-									<ListItemButton onClick={() => push(item.path)}>
+									<ListItemButton
+										className={styles.navItemBtn}
+										onClick={() => push(item.path)}
+									>
 										<ListItemIcon>{item.icon}</ListItemIcon>
 										<ListItemText>
 											<Typography>{item.name}</Typography>
@@ -107,6 +114,24 @@ const SideBar: FC<ISideBarProps> = ({
 									</ListItemButton>
 								</ListItem>
 							))}
+						</List>
+					</Box>
+
+					<Box width='100%'>
+						<List>
+							<ListItem>
+								<ListItemButton
+									className={styles.navItemBtn}
+									onClick={() => push('')}
+								>
+									<ListItemIcon>
+										<LogoutOutlinedIcon />
+									</ListItemIcon>
+									<ListItemText>
+										<Typography>Logout</Typography>
+									</ListItemText>
+								</ListItemButton>
+							</ListItem>
 						</List>
 					</Box>
 				</Drawer>
