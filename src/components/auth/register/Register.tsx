@@ -1,3 +1,4 @@
+import LoadingButton from '@mui/lab/LoadingButton'
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { Dispatch, FC } from 'react'
@@ -11,9 +12,14 @@ interface IRegisterProps<
 > {
 	register: UseFormRegister<TFieldValues | any>
 	errors: FieldErrors<FieldValues>
+	isLoading: boolean
 }
 
-const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
+const Register: FC<IRegisterProps> = ({
+	register,
+	errors,
+	isLoading
+}): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
@@ -29,10 +35,10 @@ const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 
 			<Typography
 				variant='body1'
-				padding={3}
+				padding={2}
 				fontWeight={300}
 				textAlign='center'
-				marginBottom={2}
+				marginBottom={1}
 			>
 				Enter your registration details
 			</Typography>
@@ -92,18 +98,33 @@ const Register: FC<IRegisterProps> = ({ register, errors }): JSX.Element => {
 				{...register('repeatPassword')}
 			/>
 
-			<Button
-				type='submit'
-				variant='contained'
-				sx={{
-					marginTop: 2,
-					marginBottom: 1,
-					width: '60%',
-					backgroundColor: '#1900d5 !important'
-				}}
-			>
-				Register
-			</Button>
+			{isLoading ? (
+				<LoadingButton
+					loading={true}
+					variant='contained'
+					sx={{
+						marginTop: 2,
+						marginBottom: 1,
+						width: '60%',
+						backgroundColor: '#1900d5 !important'
+					}}
+				>
+					-
+				</LoadingButton>
+			) : (
+				<Button
+					type='submit'
+					variant='contained'
+					sx={{
+						marginTop: 2,
+						marginBottom: 1,
+						width: '60%',
+						backgroundColor: '#1900d5 !important'
+					}}
+				>
+					Register
+				</Button>
+			)}
 
 			<Typography
 				variant='body1'

@@ -10,3 +10,8 @@ export const useAuthLogged = () => {
 	const { isLogged } = useAppAuthSelector(state => state.auth)
 	return isLogged
 }
+
+export const useAuthLoading = () => {
+	const { isLoading } = useAppAuthSelector(state => state.auth)
+	return isLoading
+}

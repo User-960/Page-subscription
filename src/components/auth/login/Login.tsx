@@ -1,3 +1,4 @@
+import LoadingButton from '@mui/lab/LoadingButton'
 import { Button, TextField, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
@@ -11,9 +12,14 @@ interface ILoginProps<
 > {
 	register: UseFormRegister<TFieldValues | any>
 	errors: FieldErrors<FieldValues>
+	isLoading: boolean
 }
 
-const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
+const Login: FC<ILoginProps> = ({
+	register,
+	errors,
+	isLoading
+}): JSX.Element => {
 	const { push } = useRouter()
 
 	return (
@@ -29,10 +35,10 @@ const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
 
 			<Typography
 				variant='body1'
-				padding={3}
+				padding={2}
 				fontWeight={300}
 				textAlign='center'
-				marginBottom={3}
+				marginBottom={1}
 			>
 				Type your email and password
 			</Typography>
@@ -59,18 +65,33 @@ const Login: FC<ILoginProps> = ({ register, errors }): JSX.Element => {
 				{...register('password')}
 			/>
 
-			<Button
-				type='submit'
-				variant='contained'
-				sx={{
-					marginTop: 2,
-					marginBottom: 1,
-					width: '60%',
-					backgroundColor: '#1900d5 !important'
-				}}
-			>
-				Sign in
-			</Button>
+			{isLoading ? (
+				<LoadingButton
+					loading={true}
+					variant='contained'
+					sx={{
+						marginTop: 2,
+						marginBottom: 1,
+						width: '60%',
+						backgroundColor: '#1900d5 !important'
+					}}
+				>
+					-
+				</LoadingButton>
+			) : (
+				<Button
+					type='submit'
+					variant='contained'
+					sx={{
+						marginTop: 2,
+						marginBottom: 1,
+						width: '60%',
+						backgroundColor: '#1900d5 !important'
+					}}
+				>
+					Sign in
+				</Button>
+			)}
 
 			<Typography
 				variant='body1'

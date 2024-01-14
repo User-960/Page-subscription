@@ -4,7 +4,11 @@ import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useAppAuthDispatch, useAuthLogged } from '../hooks/useAppAuth'
+import {
+	useAppAuthDispatch,
+	useAuthLoading,
+	useAuthLogged
+} from '../hooks/useAppAuth'
 
 import Layout from '../layout/Layout'
 import { IMeta } from '../seo/meta.interface'
@@ -13,8 +17,10 @@ import styles from './Auth.module.scss'
 import Login from './login/Login'
 import Register from './register/Register'
 import { AppErrors } from '@/common/errors/errors'
-import AuthService from '@/services/auth.service'
-import { login } from '@/store/slice/auth/authSlice'
+import {
+	loginUserThunk,
+	registerUserThunk
+} from '@/store/thunks/authThunk/authThunk'
 import { loginSchema, registerSchema } from '@/utils/authSchema/authSchema'
 
 const Auth: FC = (): JSX.Element => {
@@ -27,6 +33,7 @@ const Auth: FC = (): JSX.Element => {
 
 	const dispatch = useAppAuthDispatch()
 	const auth = useAuthLogged()
+	const loading = useAuthLoading()
 
 	const {
 		register,
@@ -45,8 +52,7 @@ const Auth: FC = (): JSX.Element => {
 	const handleSubmitForm = async (data: any) => {
 		if (pathname === '/login') {
 			try {
-				const user = await AuthService.loginUser(data.email, data.password)
-				dispatch(login(user))
+				dispatch(loginUserThunk(data))
 				push('/')
 			} catch (error) {
 				console.log(error)
@@ -54,14 +60,14 @@ const Auth: FC = (): JSX.Element => {
 		} else {
 			if (data.password === data.repeatPassword) {
 				try {
-					const newUser = await AuthService.createUser(
-						data.firstName,
-						data.username,
-						data.email,
-						data.password,
-						data.repeatPassword
-					)
-					dispatch(login(newUser))
+					const newUser = {
+						firstName: data.firstName,
+						username: data.username,
+						email: data.email,
+						password: data.password,
+						repeatPassword: data.repeatPassword
+					}
+					dispatch(registerUserThunk(newUser))
 					push('/')
 				} catch (error) {
 					console.log(error)
@@ -77,9 +83,9 @@ const Auth: FC = (): JSX.Element => {
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
 				<Box className={styles.container} padding={4} borderRadius={5}>
 					{pathname === '/login' ? (
-						<Login register={register} errors={errors} />
+						<Login register={register} errors={errors} isLoading={loading} />
 					) : pathname === '/register' ? (
-						<Register register={register} errors={errors} />
+						<Register register={register} errors={errors} isLoading={loading} />
 					) : null}
 				</Box>
 			</form>
