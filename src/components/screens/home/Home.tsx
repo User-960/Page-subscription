@@ -1,6 +1,8 @@
 import { Box, Grid, Typography, useTheme } from '@mui/material'
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
+import AreaChart from '@/components/ui/charts/areaChart/AreaChart'
+
 import {
 	useAppDispatch,
 	useChartPriceCoins,
@@ -88,8 +90,8 @@ const Home: FC = (): JSX.Element => {
 								</Typography>
 							</div>
 						</Grid>
-						<Grid item sm={6} lg={6} xs={12}>
-							<h5>Chart</h5>
+						<Grid item sm={6} lg={6} xs={12} className={styles.chartContainer}>
+							<AreaChart dataPrices={coin.data_price.prices} />
 						</Grid>
 					</Grid>
 				</Grid>
