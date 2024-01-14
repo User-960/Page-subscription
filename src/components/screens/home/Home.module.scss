@@ -1,3 +1,5 @@
+@import 'src/assets/styles/variables';
+
 .box {
 	flex-grow: 1;
 	padding: 32px;
@@ -15,6 +17,10 @@
 	font-weight: 600;
 	line-height: 30px;
 	text-transform: capitalize;
+	display: flex;
+	& img {
+		margin-left: 10px;
+	}
 }
 
 .coinDetails {
@@ -22,7 +28,6 @@
 	height: 100%;
 	flex-direction: column;
 	justify-content: center;
-	padding-bottom: 20px;
 }
 
 .coinPrice {
@@ -31,10 +36,28 @@
 	line-height: 48px;
 }
 
-.coinCapitalize {
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 21px;
+.priceTrend {
+	max-width: 95px;
+	display: flex;
+	align-items: center;
+	padding: 3px 4px;
+	border-radius: 4px;
+
+	font-size: 14px;
+
+	& p {
+		margin-left: 10px;
+	}
+}
+
+.trendUp {
+	background-color: #a9ffa7;
+	color: #037400;
+}
+
+.trendDown {
+	background-color: #ffa7a7;
+	color: #740000;
 }
 
 .chartContainer {

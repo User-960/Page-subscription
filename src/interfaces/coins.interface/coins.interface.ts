@@ -33,7 +33,8 @@ export interface ICoin {
 
 export interface ICoinChartData {
 	name: string
-	data_price: IChartData
+	info_coin: ICoin
+	data_price: number[][]
 }
 
 export interface IChartData {
