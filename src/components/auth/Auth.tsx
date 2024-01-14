@@ -4,11 +4,7 @@ import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import {
-	useAppAuthDispatch,
-	useAuthLoading,
-	useAuthLogged
-} from '../hooks/useAppAuth'
+import { useAppDispatch, useAuthLoading, useAuthLogged } from '../hooks/useApp'
 
 import Layout from '../layout/Layout'
 import { IMeta } from '../seo/meta.interface'
@@ -31,7 +27,7 @@ const Auth: FC = (): JSX.Element => {
 		description: 'Enter to account'
 	}
 
-	const dispatch = useAppAuthDispatch()
+	const dispatch = useAppDispatch()
 	const auth = useAuthLogged()
 	const loading = useAuthLoading()
 
