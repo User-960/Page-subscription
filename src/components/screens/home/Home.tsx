@@ -4,10 +4,12 @@ import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import AreaChart from '@/components/ui/charts/areaChart/AreaChart'
 import LineChart from '@/components/ui/charts/lineChart/LineChart'
+import TopPriceTable from '@/components/ui/topPriceTable/TopPriceTable'
 
 import {
 	useAppDispatch,
 	useChartPriceCoins,
+	useCoins,
 	useCoinsFavorite
 } from '@/components/hooks/useApp'
 
@@ -21,7 +23,8 @@ import styles from './Home.module.scss'
 import { ICoinChartData } from '@/interfaces/coins.interface/coins.interface'
 import {
 	chartPriceCoinsThunk,
-	favoriteCoinsThunk
+	favoriteCoinsThunk,
+	getTopPriceThunk
 } from '@/store/thunks/coinsThunk/coinsThunk'
 import { tokens } from '@/theme/theme'
 
@@ -37,12 +40,18 @@ const Home: FC = (): JSX.Element => {
 
 	const testCoins = useMemo(() => ['bitcoin', 'ethereum'], [])
 
-	const dispatch = useAppDispatch()
+	const coins = useCoins()
 	const chartPriceCoins = useChartPriceCoins()
+	const dispatch = useAppDispatch()
+
 	const filteredChartPriceCoins = chartPriceCoins.filter(
 		(value: ICoinChartData, index: number, self: ICoinChartData[]) =>
 			index === self.findIndex(t => t.name === value.name)
 	)
+
+	const filterCoinsList = coins
+		.slice()
+		.sort((a, b) => b.current_price - a.current_price)
 
 	const fetchData = useCallback(
 		(data: string[]) => {
@@ -61,8 +70,9 @@ const Home: FC = (): JSX.Element => {
 	// 	} else {
 	// 		fetchDataRef.current = true
 	// 		fetchData(testCoins)
+	// 		dispatch(getTopPriceThunk(''))
 	// 	}
-	// }, [testCoins, fetchData])
+	// }, [testCoins, fetchData, dispatch])
 
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
@@ -136,6 +146,7 @@ const Home: FC = (): JSX.Element => {
 				<Grid container spacing={2} className={styles.areaChart}>
 					{renderChartBlock}
 				</Grid>
+
 				<Grid
 					container
 					className={styles.lineChartBlock}
@@ -151,6 +162,25 @@ const Home: FC = (): JSX.Element => {
 					<Grid item xs={12} sm={12} lg={12}>
 						{filteredChartPriceCoins.length && (
 							<LineChart data={filteredChartPriceCoins} />
+						)}
+					</Grid>
+				</Grid>
+
+				<Grid
+					container
+					className={styles.topListTable}
+					sx={{
+						backgroundColor: `${
+							theme.palette.mode === 'light'
+								? colors.primary.DEFAULT
+								: colors.primary[600]
+						}`,
+						border: `1px solid ${colors.borderColor}`
+					}}
+				>
+					<Grid item xs={12} sm={12} lg={12}>
+						{filterCoinsList.length && (
+							<TopPriceTable coins={filterCoinsList.slice(0, 6)} />
 						)}
 					</Grid>
 				</Grid>

@@ -33,3 +33,19 @@ export const chartPriceCoinsThunk = createAsyncThunk(
 		}
 	}
 )
+
+export const getTopPriceThunk = createAsyncThunk(
+	'coins/markets/topPrice',
+	async (_: string, { rejectWithValue }) => {
+		try {
+			const coins = await CoinGeckoService.getTopPriceList()
+			return coins
+		} catch (error: any) {
+			if (error.response && error.response.data.message) {
+				return rejectWithValue(error.response.data.message)
+			} else {
+				return rejectWithValue(error.message)
+			}
+		}
+	}
+)

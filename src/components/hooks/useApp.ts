@@ -16,6 +16,11 @@ export const useAuthLoading = () => {
 	return isLoading
 }
 
+export const useCoins = () => {
+	const { coins } = useAppSelector(state => state.coins)
+	return coins
+}
+
 export const useCoinsFavorite = () => {
 	const { favoriteCoins } = useAppSelector(state => state.coins)
 	return favoriteCoins
