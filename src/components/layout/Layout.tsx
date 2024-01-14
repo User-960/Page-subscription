@@ -4,7 +4,7 @@ import { FC, Fragment, ReactNode, useState } from 'react'
 import SideBar from '../ui/sideBar/SideBar'
 import TopBar from '../ui/topBar/TopBar'
 
-import { useAuthLogged } from '../hooks/useAppAuth'
+import { useAuthLogged } from '../hooks/useApp'
 
 import Meta from '../seo/Meta'
 import { IMeta } from '../seo/meta.interface'

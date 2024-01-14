@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { useAuthLogged } from '@/components/hooks/useAppAuth'
+import { useAuthLogged } from '@/components/hooks/useApp'
 
 import Settings from '@/components/screens/settings/Settings'
 

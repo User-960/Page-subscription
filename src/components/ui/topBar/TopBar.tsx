@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import React, { FC } from 'react'
 
-import { useAppAuthSelector } from '@/components/hooks/useAppAuth'
+import { useAppSelector } from '@/components/hooks/useApp'
 import { useColorMode } from '@/components/hooks/useColorMode'
 
 import styles from './TopBar.module.scss'
@@ -27,7 +27,7 @@ interface ITopBarProps {
 }
 
 const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
-	const userData = useAppAuthSelector(state => state.auth.userData)
+	const userData = useAppSelector(state => state.auth.userData)
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()

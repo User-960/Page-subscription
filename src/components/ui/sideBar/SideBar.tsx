@@ -16,7 +16,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
-import { useAppAuthDispatch } from '../../hooks/useAppAuth'
+import { useAppDispatch } from '../../hooks/useApp'
 
 import Logo from '../../../assets/images/SideBar/logo.svg'
 
@@ -46,7 +46,7 @@ const SideBar: FC<ISideBarProps> = ({
 	const [active, setActive] = useState<string>('')
 	const { pathname, push } = useRouter()
 
-	const dispatch = useAppAuthDispatch()
+	const dispatch = useAppDispatch()
 
 	const logOutFunc = () => {
 		dispatch(logout())
