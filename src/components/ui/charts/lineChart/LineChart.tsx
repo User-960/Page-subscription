@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 import {
 	CategoryScale,
 	Chart as ChartJS,
@@ -24,8 +23,6 @@ ChartJS.register(
 	Tooltip,
 	Legend
 )
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 
 interface ILineChartProps {
 	data: ICoinChartData[]

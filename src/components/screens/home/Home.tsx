@@ -67,7 +67,6 @@ const Home: FC = (): JSX.Element => {
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
 			const currentPrice = coin.info_coin.current_price
-			const currentCap = coin.info_coin.market_cap
 			const changePrice = coin.info_coin.price_change_percentage_24h
 			return (
 				<Grid key={coin.name} item sm={6} lg={6} xs={12}>
