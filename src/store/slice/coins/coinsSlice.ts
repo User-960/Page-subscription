@@ -40,6 +40,10 @@ export const coinsSlice = createSlice({
 			chartPriceCoinsThunk.fulfilled,
 			(state: ICoinsState, action) => {
 				state.chartPriceCoinsData.push(action.payload)
+
+				state.chartPriceCoinsData.forEach(
+					coin => (coin.data_price.prices.length = 50)
+				)
 			}
 		)
 	}
