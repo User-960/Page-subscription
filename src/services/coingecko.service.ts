@@ -5,7 +5,7 @@ class CoinGeckoService {
 	private URL_COINS = '/coins'
 	private URL_LIST_COINS = '/list'
 	private URL_FAVORITE_COINS = `/markets?vs_currency=usd`
-	private URL_CHART_PRICE_COINS = `/market_chart?vs_currency=usd&days=1`
+	private URL_CHART_PRICE_COINS = `/market_chart?vs_currency=usd&days=90`
 
 	async getCoinsList() {
 		const { data } = await $axiosCoinGeckoApi.get<any>(
