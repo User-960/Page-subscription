@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { ICoinsState } from '@/interfaces/coins.interface/coins.interface'
-import { favoriteCoinsThunk } from '@/store/thunks/coinsThunk/coinsThunk'
+import {
+	chartPriceCoinsThunk,
+	favoriteCoinsThunk
+} from '@/store/thunks/coinsThunk/coinsThunk'
 
 const initialState: ICoinsState = {
 	coins: [],
-	favoriteCoins: []
+	favoriteCoins: [],
+	chartPriceCoinsData: []
 }
 
 export const coinsSlice = createSlice({
@@ -31,6 +35,13 @@ export const coinsSlice = createSlice({
 		// 		state.isLoading = false
 		// 	}
 		// )
+
+		builder.addCase(
+			chartPriceCoinsThunk.fulfilled,
+			(state: ICoinsState, action) => {
+				state.chartPriceCoinsData.push(action.payload)
+			}
+		)
 	}
 })
 

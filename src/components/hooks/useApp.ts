@@ -20,3 +20,8 @@ export const useCoinsFavorite = () => {
 	const { favoriteCoins } = useAppSelector(state => state.coins)
 	return favoriteCoins
 }
+
+export const useChartPriceCoins = () => {
+	const { chartPriceCoinsData } = useAppSelector(state => state.coins)
+	return chartPriceCoinsData
+}

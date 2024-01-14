@@ -34,4 +34,5 @@ export interface ICoin {
 export interface ICoinsState {
 	coins: ICoin[]
 	favoriteCoins: ICoin[]
+	chartPriceCoinsData: any[]
 }
