@@ -6,13 +6,7 @@ class CoinGeckoService {
 	private URL_LIST_COINS = '/list'
 	private URL_FAVORITE_COINS = `/markets?vs_currency=usd`
 	private URL_CHART_PRICE_COINS = `/market_chart?vs_currency=usd&days=90`
-
-	async getCoinsList() {
-		const { data } = await $axiosCoinGeckoApi.get<any>(
-			`${this.URL_COINS}/${this.URL_LIST_COINS}`
-		)
-		return data
-	}
+	private URL_TOP_LIST_COINS = `/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
 
 	async getFavoriteCoins(coins: string) {
 		const { data } = await $axiosCoinGeckoApi.get<ICoin[]>(
@@ -38,6 +32,13 @@ class CoinGeckoService {
 				infoPriceCoin.data.prices.length - 1
 			)
 		}
+	}
+
+	async getTopPriceList() {
+		const { data } = await $axiosCoinGeckoApi.get<any>(
+			`${this.URL_COINS}${this.URL_TOP_LIST_COINS}`
+		)
+		return data
 	}
 }
 
