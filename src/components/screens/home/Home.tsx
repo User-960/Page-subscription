@@ -1,4 +1,5 @@
 import { Box, Grid, Typography, useTheme } from '@mui/material'
+import Image from 'next/image'
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import AreaChart from '@/components/ui/charts/areaChart/AreaChart'
@@ -59,8 +60,8 @@ const Home: FC = (): JSX.Element => {
 
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
-			const currentPrice = coin.data_price.prices[0]
-			const currentCap = coin.data_price.market_caps[0]
+			const currentPrice = coin.info_coin.current_price
+			const currentCap = coin.info_coin.market_cap
 			return (
 				<Grid key={coin.name} item sm={6} lg={6} xs={12}>
 					<Grid
@@ -76,17 +77,23 @@ const Home: FC = (): JSX.Element => {
 						}}
 					>
 						<Grid item sm={6} lg={6} xs={12}>
-							<h3 className={styles.coinName}>{coin.name}</h3>
+							<h3 className={styles.coinName}>
+								{coin.name}
+								<Image
+									src={coin.info_coin.image}
+									alt='icon of coin'
+									width={30}
+									height={30}
+								/>
+							</h3>
 							<div className={styles.coinDetails}>
-								<h3 className={styles.coinPrice}>
-									${currentPrice[1].toFixed(4)}
-								</h3>
+								<h3 className={styles.coinPrice}>${currentPrice}</h3>
 								<Typography
 									component='p'
 									className={styles.coinCapitalize}
 									sx={{ color: `${colors.secondary.DEFAULT}` }}
 								>
-									${currentCap[1].toFixed(0)}
+									${currentCap}
 								</Typography>
 							</div>
 						</Grid>

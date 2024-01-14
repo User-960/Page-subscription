@@ -42,7 +42,7 @@ export const coinsSlice = createSlice({
 				state.chartPriceCoinsData.push(action.payload)
 
 				state.chartPriceCoinsData.forEach(
-					coin => (coin.data_price.prices.length = 50)
+					coin => (coin.data_price.prices.length = 30)
 				)
 			}
 		)

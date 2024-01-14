@@ -15,6 +15,10 @@
 	font-weight: 600;
 	line-height: 30px;
 	text-transform: capitalize;
+	display: flex;
+	& img {
+		margin-left: 10px;
+	}
 }
 
 .coinDetails {
