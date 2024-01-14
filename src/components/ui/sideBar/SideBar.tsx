@@ -82,7 +82,7 @@ const SideBar: FC<ISideBarProps> = ({
 					>
 						<div className={styles.container}>
 							<Box className={styles.brand} onClick={() => push('/')}>
-								<Image src={Logo} alt='logo' />
+								<Image src={Logo} alt='logo' className={styles.logo} />
 								<Typography
 									variant='h1'
 									color={
