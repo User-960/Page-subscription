@@ -47,7 +47,10 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 					</IconButton>
 					<Grid className={styles.nameBlock}>
 						<Typography variant='h3'>
-							Welcome, {userData?.user.firstName}
+							Welcome,
+							{localStorage.getItem('name')
+								? localStorage.getItem('name')
+								: userData?.user.firstName}
 						</Typography>
 						<Typography
 							className={styles.dataText}

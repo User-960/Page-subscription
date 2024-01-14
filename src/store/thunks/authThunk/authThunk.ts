@@ -11,6 +11,7 @@ export const loginUserThunk = createAsyncThunk(
 	async (data: IAuthFormFieldsLogin, { rejectWithValue }) => {
 		try {
 			const user = await AuthService.loginUser(data.email, data.password)
+			localStorage.setItem('name', `${user.user.firstName}`)
 			return user
 		} catch (error: any) {
 			if (error.response && error.response.data.message) {
@@ -33,6 +34,7 @@ export const registerUserThunk = createAsyncThunk(
 				data.password,
 				data.repeatPassword
 			)
+			localStorage.setItem('name', `${user.user.firstName}`)
 			return user
 		} catch (error: any) {
 			if (error.response && error.response.data.message) {

@@ -35,10 +35,10 @@ const Login: FC<ILoginProps> = ({
 
 			<Typography
 				variant='body1'
-				padding={3}
+				padding={2}
 				fontWeight={300}
 				textAlign='center'
-				marginBottom={3}
+				marginBottom={1}
 			>
 				Type your email and password
 			</Typography>

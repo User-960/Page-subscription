@@ -35,10 +35,10 @@ const Register: FC<IRegisterProps> = ({
 
 			<Typography
 				variant='body1'
-				padding={3}
+				padding={2}
 				fontWeight={300}
 				textAlign='center'
-				marginBottom={2}
+				marginBottom={1}
 			>
 				Enter your registration details
 			</Typography>

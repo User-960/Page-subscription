@@ -4,7 +4,11 @@ import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useAppAuthDispatch, useAuthLogged } from '../hooks/useAppAuth'
+import {
+	useAppAuthDispatch,
+	useAuthLoading,
+	useAuthLogged
+} from '../hooks/useAppAuth'
 
 import Layout from '../layout/Layout'
 import { IMeta } from '../seo/meta.interface'
@@ -27,10 +31,9 @@ const Auth: FC = (): JSX.Element => {
 		description: 'Enter to account'
 	}
 
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-
 	const dispatch = useAppAuthDispatch()
 	const auth = useAuthLogged()
+	const loading = useAuthLoading()
 
 	const {
 		register,
@@ -47,14 +50,11 @@ const Auth: FC = (): JSX.Element => {
 	}, [auth])
 
 	const handleSubmitForm = async (data: any) => {
-		setIsLoading(true)
 		if (pathname === '/login') {
 			try {
 				dispatch(loginUserThunk(data))
-				setIsLoading(false)
 				push('/')
 			} catch (error) {
-				setIsLoading(false)
 				console.log(error)
 			}
 		} else {
@@ -68,10 +68,8 @@ const Auth: FC = (): JSX.Element => {
 						repeatPassword: data.repeatPassword
 					}
 					dispatch(registerUserThunk(newUser))
-					setIsLoading(false)
 					push('/')
 				} catch (error) {
-					setIsLoading(false)
 					console.log(error)
 				}
 			} else {
@@ -85,13 +83,9 @@ const Auth: FC = (): JSX.Element => {
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
 				<Box className={styles.container} padding={4} borderRadius={5}>
 					{pathname === '/login' ? (
-						<Login register={register} errors={errors} isLoading={isLoading} />
+						<Login register={register} errors={errors} isLoading={loading} />
 					) : pathname === '/register' ? (
-						<Register
-							register={register}
-							errors={errors}
-							isLoading={isLoading}
-						/>
+						<Register register={register} errors={errors} isLoading={loading} />
 					) : null}
 				</Box>
 			</form>
