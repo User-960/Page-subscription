@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useRef } from 'react'
+import { Box, Grid, Typography, useTheme } from '@mui/material'
+import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import {
 	useAppDispatch,
@@ -10,44 +11,99 @@ import Layout from '@/components/layout/Layout'
 import { IMeta } from '@/components/seo/meta.interface'
 
 import styles from './Home.module.scss'
+import { ICoinChartData } from '@/interfaces/coins.interface/coins.interface'
 import {
 	chartPriceCoinsThunk,
 	favoriteCoinsThunk
 } from '@/store/thunks/coinsThunk/coinsThunk'
+import { tokens } from '@/theme/theme'
 
 const Home: FC = (): JSX.Element => {
 	const meta: IMeta = {
 		title: 'Home',
 		description: 'Home page'
 	}
+	const theme = useTheme()
+	const colors = tokens(theme.palette.mode)
 
-	const testCoins = ['bitcoin', 'ethereum']
+	const testCoins = useMemo(() => ['bitcoin', 'ethereum'], [])
 
 	const dispatch = useAppDispatch()
-	// const favoriteCoins = useCoinsFavorite()
 	const chartPriceCoins = useChartPriceCoins()
+	const filteredChartPriceCoins = chartPriceCoins.filter(
+		(value: ICoinChartData, index: number, self: ICoinChartData[]) =>
+			index === self.findIndex(t => t.name === value.name)
+	)
 
-	const fetchData = (data: string[]) => {
-		data.forEach(el => {
-			dispatch(chartPriceCoinsThunk(el))
-		})
-	}
+	const fetchData = useCallback(
+		(data: string[]) => {
+			data.forEach(el => {
+				dispatch(chartPriceCoinsThunk(el))
+			})
+		},
+		[dispatch]
+	)
 
 	const fetchDataRef = useRef(false)
 
 	useEffect(() => {
-		// dispatch(favoriteCoinsThunk('bitcoin, ethereum'))
 		if (fetchDataRef.current) {
 			return
 		} else {
 			fetchDataRef.current = true
 			fetchData(testCoins)
 		}
-	}, [])
+	}, [testCoins, fetchData])
+
+	const renderChartBlock = filteredChartPriceCoins.map(
+		(coin: ICoinChartData) => {
+			const currentPrice = coin.data_price.prices[0]
+			const currentCap = coin.data_price.market_caps[0]
+			return (
+				<Grid key={coin.name} item sm={6} lg={6} xs={12}>
+					<Grid
+						className={styles.topCardItem}
+						container
+						sx={{
+							backgroundColor: `${
+								theme.palette.mode === 'light'
+									? colors.primary.DEFAULT
+									: colors.primary[600]
+							}`,
+							border: `1px solid ${colors.borderColor}`
+						}}
+					>
+						<Grid item sm={6} lg={6} xs={12}>
+							<h3 className={styles.coinName}>{coin.name}</h3>
+							<div className={styles.coinDetails}>
+								<h3 className={styles.coinPrice}>
+									${currentPrice[1].toFixed(4)}
+								</h3>
+								<Typography
+									component='p'
+									className={styles.coinCapitalize}
+									sx={{ color: `${colors.secondary.DEFAULT}` }}
+								>
+									${currentCap[1].toFixed(0)}
+								</Typography>
+							</div>
+						</Grid>
+						<Grid item sm={6} lg={6} xs={12}>
+							<h5>Chart</h5>
+						</Grid>
+					</Grid>
+				</Grid>
+			)
+		}
+	)
 
 	return (
 		<Layout meta={meta}>
-			<div>The Home Page</div>
+			<Box className={styles.box}>
+				<Grid container spacing={2}>
+					{renderChartBlock}
+				</Grid>
+			</Box>
 		</Layout>
 	)
 }

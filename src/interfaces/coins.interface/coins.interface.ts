@@ -31,8 +31,19 @@ export interface ICoin {
 	last_updated: string
 }
 
+export interface ICoinChartData {
+	name: string
+	data_price: IChartData
+}
+
+export interface IChartData {
+	prices: number[][]
+	market_caps: number[][]
+	total_volumes: any[]
+}
+
 export interface ICoinsState {
 	coins: ICoin[]
 	favoriteCoins: ICoin[]
-	chartPriceCoinsData: any[]
+	chartPriceCoinsData: ICoinChartData[]
 }

@@ -1,5 +1,5 @@
 import { $axiosCoinGeckoApi } from '@/api/api'
-import { ICoin } from '@/interfaces/coins.interface/coins.interface'
+import { IChartData, ICoin } from '@/interfaces/coins.interface/coins.interface'
 
 class CoinGeckoService {
 	private URL_COINS = '/coins'
@@ -22,7 +22,7 @@ class CoinGeckoService {
 	}
 
 	async getChartPriceCoins(coin: string) {
-		const { data } = await $axiosCoinGeckoApi.get<any>(
+		const { data } = await $axiosCoinGeckoApi.get<IChartData>(
 			`${this.URL_COINS}/${coin}${this.URL_CHART_PRICE_COINS}`
 		)
 		return { name: coin, data_price: data }
