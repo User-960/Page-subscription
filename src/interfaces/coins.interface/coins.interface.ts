@@ -34,7 +34,7 @@ export interface ICoin {
 export interface ICoinChartData {
 	name: string
 	info_coin: ICoin
-	data_price: IChartData
+	data_price: number[][]
 }
 
 export interface IChartData {

@@ -33,7 +33,10 @@ class CoinGeckoService {
 		return {
 			name: coin,
 			info_coin: infoCoin.data[0],
-			data_price: infoPriceCoin.data
+			data_price: infoPriceCoin.data.prices.slice(
+				infoPriceCoin.data.prices.length - 30,
+				infoPriceCoin.data.prices.length - 1
+			)
 		}
 	}
 }
