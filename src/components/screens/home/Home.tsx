@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import AreaChart from '@/components/ui/charts/areaChart/AreaChart'
+import LineChart from '@/components/ui/charts/lineChart/LineChart'
 
 import {
 	useAppDispatch,
@@ -54,14 +55,14 @@ const Home: FC = (): JSX.Element => {
 
 	const fetchDataRef = useRef(false)
 
-	useEffect(() => {
-		if (fetchDataRef.current) {
-			return
-		} else {
-			fetchDataRef.current = true
-			fetchData(testCoins)
-		}
-	}, [testCoins, fetchData])
+	// useEffect(() => {
+	// 	if (fetchDataRef.current) {
+	// 		return
+	// 	} else {
+	// 		fetchDataRef.current = true
+	// 		fetchData(testCoins)
+	// 	}
+	// }, [testCoins, fetchData])
 
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
@@ -85,12 +86,12 @@ const Home: FC = (): JSX.Element => {
 						<Grid item sm={6} lg={6} xs={12}>
 							<h3 className={styles.coinName}>
 								{coin.name}
-								<Image
+								{/* <Image
 									src={coin.info_coin.image}
 									alt='icon of coin'
 									width={30}
 									height={30}
-								/>
+								/> */}
 							</h3>
 							<div className={styles.coinDetails}>
 								<h3 className={styles.coinPrice}>${currentPrice}</h3>
@@ -133,8 +134,26 @@ const Home: FC = (): JSX.Element => {
 	return (
 		<Layout meta={meta}>
 			<Box className={styles.box}>
-				<Grid container spacing={2}>
+				<Grid container spacing={2} className={styles.areaChart}>
 					{renderChartBlock}
+				</Grid>
+				<Grid
+					container
+					className={styles.lineChartBlock}
+					sx={{
+						backgroundColor: `${
+							theme.palette.mode === 'light'
+								? colors.primary.DEFAULT
+								: colors.primary[600]
+						}`,
+						border: `1px solid ${colors.borderColor}`
+					}}
+				>
+					<Grid item xs={12} sm={12} lg={12}>
+						{filteredChartPriceCoins.length && (
+							<LineChart data={filteredChartPriceCoins} />
+						)}
+					</Grid>
 				</Grid>
 			</Box>
 		</Layout>
