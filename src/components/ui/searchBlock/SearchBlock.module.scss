@@ -1,0 +1,21 @@
+.searchBlock {
+	border-radius: 8px;
+	margin-left: 28px;
+	max-height: 48px;
+}
+
+.iconSearch {
+	&:hover {
+		background-color: transparent;
+	}
+}
+
+.input {
+	padding: 12px 18px;
+}
+
+@media (max-width: 720px) {
+	.searchBlock {
+		margin: 0px 15px;
+	}
+}

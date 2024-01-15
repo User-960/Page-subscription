@@ -20,7 +20,10 @@ import TrendDown from '../../../assets/images/Chart/trendDown.svg'
 import TrendUp from '../../../assets/images/Chart/trendUp.svg'
 
 import styles from './Home.module.scss'
-import { ICoinChartData } from '@/interfaces/coins.interface/coins.interface'
+import {
+	ICoin,
+	ICoinChartData
+} from '@/interfaces/coins.interface/coins.interface'
 import {
 	chartPriceCoinsThunk,
 	favoriteCoinsThunk,
@@ -48,10 +51,6 @@ const Home: FC = (): JSX.Element => {
 		(value: ICoinChartData, index: number, self: ICoinChartData[]) =>
 			index === self.findIndex(t => t.name === value.name)
 	)
-
-	const filterCoinsList = coins
-		.slice()
-		.sort((a, b) => b.current_price - a.current_price)
 
 	const fetchData = useCallback(
 		(data: string[]) => {
@@ -132,7 +131,10 @@ const Home: FC = (): JSX.Element => {
 							</div>
 						</Grid>
 						<Grid item sm={6} lg={6} xs={12} className={styles.chartContainer}>
-							<AreaChart dataPrices={coin.data_price} />
+							<AreaChart
+								dataPrices={coin.data_price}
+								changePrice={changePrice}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>
@@ -179,9 +181,7 @@ const Home: FC = (): JSX.Element => {
 					}}
 				>
 					<Grid item xs={12} sm={12} lg={12}>
-						{filterCoinsList.length && (
-							<TopPriceTable coins={filterCoinsList.slice(0, 6)} />
-						)}
+						<TopPriceTable coins={coins.slice(0, 15)} />
 					</Grid>
 				</Grid>
 			</Box>

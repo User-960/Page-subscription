@@ -2,7 +2,6 @@ import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
-import SearchIcon from '@mui/icons-material/Search'
 import {
 	AppBar,
 	Box,
@@ -11,11 +10,16 @@ import {
 	InputBase,
 	Toolbar,
 	Typography,
+	useMediaQuery,
 	useTheme
 } from '@mui/material'
+import moment from 'moment'
 import React, { FC } from 'react'
 
+import SearchBlock from '@/components/ui/searchBlock/SearchBlock'
+
 import { useAppSelector } from '@/components/hooks/useApp'
+import { useCoins } from '@/components/hooks/useApp'
 import { useColorMode } from '@/components/hooks/useColorMode'
 
 import styles from './TopBar.module.scss'
@@ -31,6 +35,8 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()
+	const coins = useCoins()
+	const isNoneMobile = useMediaQuery('(min-width:720px)')
 
 	return (
 		<AppBar
@@ -55,14 +61,18 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 							className={styles.dataText}
 							sx={{ color: `${theme.palette.secondary.main}` }}
 						>
-							1 Oct. 2017 year
+							{moment().format('MMMM Do YYYY')}
 						</Typography>
 					</Grid>
 				</Box>
 				<Box className={styles.panelBlock}>
 					<Grid
 						className={styles.panelBlockInner}
-						sx={{ borderRight: `1px solid ${colors.borderColor}` }}
+						sx={{
+							borderRight: isNoneMobile
+								? `1px solid ${colors.borderColor}`
+								: 'none'
+						}}
 					>
 						<IconButton
 							className={styles.iconTheme}
@@ -79,15 +89,8 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 							<NotificationsNoneIcon />
 						</IconButton>
 					</Grid>
-					<Grid
-						className={styles.searchBlock}
-						sx={{ backgroundColor: `${colors.primary[600]}` }}
-					>
-						<IconButton className={styles.iconSearch}>
-							<SearchIcon />
-						</IconButton>
-						<InputBase className={styles.input} placeholder='Search' />
-					</Grid>
+
+					{isNoneMobile && coins && <SearchBlock />}
 				</Box>
 			</Toolbar>
 		</AppBar>

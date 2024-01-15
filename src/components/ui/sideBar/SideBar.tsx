@@ -19,6 +19,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../hooks/useApp'
 
 import Logo from '../../../assets/images/SideBar/logo.svg'
+import SearchBlock from '../searchBlock/SearchBlock'
 
 import styles from './SideBar.module.scss'
 import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
@@ -100,6 +101,8 @@ const SideBar: FC<ISideBarProps> = ({
 								)}
 							</Box>
 						</div>
+
+						{!isNoneMobile && <SearchBlock />}
 
 						<List className={styles.list}>
 							{navMenu.map((item: INavMenuItem) => (

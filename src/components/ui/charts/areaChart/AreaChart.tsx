@@ -29,9 +29,13 @@ ChartJS.register(
 
 interface IAreaChartProps {
 	dataPrices: number[][]
+	changePrice: number
 }
 
-const AreaChart: FC<IAreaChartProps> = ({ dataPrices }): JSX.Element => {
+const AreaChart: FC<IAreaChartProps> = ({
+	dataPrices,
+	changePrice
+}): JSX.Element => {
 	const options = {
 		responsive: true,
 		scales: {
@@ -70,7 +74,7 @@ const AreaChart: FC<IAreaChartProps> = ({ dataPrices }): JSX.Element => {
 				backgroundColor: (context: ScriptableContext<'line'>) => {
 					const ctx = context.chart.ctx
 					const gradient = ctx.createLinearGradient(0, 0, 0, 180)
-					gradient.addColorStop(0, '#C1EF00')
+					gradient.addColorStop(0, changePrice > 0 ? '#C1EF00' : '#dc3800')
 					gradient.addColorStop(1, '#232323')
 					return gradient
 				}
