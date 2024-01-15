@@ -81,3 +81,15 @@
 	min-height: 270px;
 	border-radius: 12px;
 }
+
+@media (max-width: 600px) {
+	.topCardItem {
+		flex-wrap: nowrap;
+	}
+}
+
+@media (max-width: 510px) {
+	.chartContainer {
+		display: none;
+	}
+}

@@ -1,3 +1,5 @@
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {
 	Box,
 	Paper,
@@ -9,7 +11,7 @@ import {
 	TableRow
 } from '@mui/material'
 import Image from 'next/image'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import TrendDown from '../../../assets/images/Chart/trendDown.svg'
 import TrendUp from '../../../assets/images/Chart/trendUp.svg'
@@ -22,6 +24,22 @@ interface ITopPriceListProps {
 }
 
 const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
+	const [isSortDown, setIsSortDown] = useState<boolean | null>(null)
+
+	const sortCoinsList = () => {
+		if (isSortDown) {
+			return coins.slice().sort((a, b) => a.current_price - b.current_price)
+		} else if (isSortDown === null) {
+			return coins
+		} else {
+			return coins.slice().sort((a, b) => b.current_price - a.current_price)
+		}
+	}
+
+	useEffect(() => {
+		sortCoinsList()
+	}, [isSortDown])
+
 	return (
 		<>
 			<TableContainer component={Paper} className={styles.tableContainer}>
@@ -29,19 +47,26 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>
-							<TableCell align='right'>Price</TableCell>
+							<TableCell align='right'>
+								Price{' '}
+								<button onClick={() => setIsSortDown(prev => !prev)}>
+									{isSortDown ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+								</button>
+							</TableCell>
 							<TableCell align='right'>Change ($)</TableCell>
 							<TableCell align='right'>Change (%)</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{coins.map(coin => (
+						{sortCoinsList().map((coin, index) => (
 							<TableRow
 								key={coin.id}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 							>
 								<TableCell component='th' scope='row'>
-									{coin.name}
+									<p className={styles.cellName}>
+										<span>{index + 1}.</span> {coin.name}
+									</p>
 								</TableCell>
 								<TableCell align='right'>{coin.current_price}</TableCell>
 								<TableCell align='right'>

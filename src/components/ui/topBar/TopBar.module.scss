@@ -76,3 +76,17 @@
 		margin-right: 10px;
 	}
 }
+
+@media (max-width: 400px) {
+	.panelBlockInner {
+		padding: 0px;
+	}
+
+	.toolBar {
+		padding: 25px 10px;
+	}
+
+	.dataText {
+		max-width: 100px;
+	}
+}
