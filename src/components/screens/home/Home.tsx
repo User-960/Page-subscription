@@ -52,9 +52,6 @@ const Home: FC = (): JSX.Element => {
 			index === self.findIndex(t => t.name === value.name)
 	)
 
-	// const sortCoinsList = () =>
-	// 	coins.slice().sort((a, b) => b.current_price - a.current_price)
-
 	const fetchData = useCallback(
 		(data: string[]) => {
 			data.forEach(el => {

@@ -19,6 +19,7 @@ import React, { FC } from 'react'
 import SearchBlock from '@/components/ui/searchBlock/SearchBlock'
 
 import { useAppSelector } from '@/components/hooks/useApp'
+import { useCoins } from '@/components/hooks/useApp'
 import { useColorMode } from '@/components/hooks/useColorMode'
 
 import styles from './TopBar.module.scss'
@@ -34,6 +35,7 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()
+	const coins = useCoins()
 	const isNoneMobile = useMediaQuery('(min-width:720px)')
 
 	return (
@@ -59,7 +61,7 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 							className={styles.dataText}
 							sx={{ color: `${theme.palette.secondary.main}` }}
 						>
-							{moment().format('MMMM Do YYYY, h:mm a')}
+							{moment().format('MMMM Do YYYY')}
 						</Typography>
 					</Grid>
 				</Box>
@@ -88,7 +90,7 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 						</IconButton>
 					</Grid>
 
-					{isNoneMobile && <SearchBlock />}
+					{isNoneMobile && coins && <SearchBlock />}
 				</Box>
 			</Toolbar>
 		</AppBar>
