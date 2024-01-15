@@ -3,17 +3,20 @@ import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
-import { useCoins } from '@/components/hooks/useApp'
+import { useAppDispatch, useCoins } from '@/components/hooks/useApp'
 
 import Layout from '@/components/layout/Layout'
 import { IMeta } from '@/components/seo/meta.interface'
 
 import styles from './SingleCoin.module.scss'
+import { createWatchlistThunk } from '@/store/thunks/watchlistThunk/watchlistThunk'
 import { tokens } from '@/theme/theme'
 
 const SingleCoin: FC = (): JSX.Element => {
 	const { back } = useRouter()
 	const { id } = useParams()
+
+	const dispatch = useAppDispatch()
 
 	const meta: IMeta = {
 		title: `${id}`,
@@ -26,6 +29,19 @@ const SingleCoin: FC = (): JSX.Element => {
 	const coins = useCoins()
 
 	const findCoin = coins.find(coin => coin.name === (id as string))
+
+	const handleCreateRecord = () => {
+		const data = {
+			name: '',
+			assetId: ''
+		}
+
+		if (findCoin?.name && findCoin?.id) {
+			data.name = findCoin.name
+			data.assetId = findCoin.id
+			dispatch(createWatchlistThunk(data))
+		}
+	}
 
 	return (
 		<Layout meta={meta}>
@@ -287,7 +303,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						</Button>
 
 						<Button
-							onClick={() => back()}
+							onClick={handleCreateRecord}
 							variant='outlined'
 							color='success'
 							className={styles.cardBtn}

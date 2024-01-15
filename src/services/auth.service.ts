@@ -3,10 +3,12 @@ import Cookies from 'js-cookie'
 import { $axiosAuth } from '@/api/api'
 import { EN_USER } from '@/config/app.constants'
 import { IUserResponse } from '@/interfaces/auth.interface/auth.interface'
+import { IWatchlist } from '@/interfaces/watchlist.interface/watchlist.interface'
 
 class AuthService {
 	private URL_LOGIN = '/auth/login'
 	private URL_REGISTER = '/auth/register'
+	private URL_WATCHLIST = '/watchlist'
 
 	async loginUser(email: string | null, password: string | null) {
 		const { data } = await $axiosAuth.post<IUserResponse>(`${this.URL_LOGIN}`, {
@@ -38,6 +40,21 @@ class AuthService {
 		)
 
 		if (data.token) Cookies.set(EN_USER.TOKEN, data.token)
+
+		return data
+	}
+
+	async createNewWatchlist(
+		name: string | null,
+		assetId: string | number | null
+	) {
+		const { data } = await $axiosAuth.post<IWatchlist[]>(
+			`${this.URL_WATCHLIST}/create`,
+			{
+				name,
+				assetId
+			}
+		)
 
 		return data
 	}

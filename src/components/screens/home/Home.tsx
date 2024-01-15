@@ -82,22 +82,22 @@ const Home: FC = (): JSX.Element => {
 
 	const fetchDataRef = useRef(false)
 
-	// useEffect(() => {
-	// 	if (fetchDataRef.current) {
-	// 		console.log(1)
-	// 		return
-	// 	} else {
-	// 		if (chartPriceCoins.length === 0 && coins.length === 0) {
-	// 			console.log(2)
-	// 			fetchDataRef.current = true
-	// 			fetchData(testCoins)
-	// 			dispatch(getTopPriceThunk(''))
-	// 		} else {
-	// 			console.log(3)
-	// 			return
-	// 		}
-	// 	}
-	// }, [testCoins, fetchData, dispatch, chartPriceCoins, coins])
+	useEffect(() => {
+		if (fetchDataRef.current) {
+			console.log(1)
+			return
+		} else {
+			if (chartPriceCoins.length === 0 && coins.length === 0) {
+				console.log(2)
+				fetchDataRef.current = true
+				fetchData(testCoins)
+				dispatch(getTopPriceThunk(''))
+			} else {
+				console.log(3)
+				return
+			}
+		}
+	}, [testCoins, fetchData, dispatch, chartPriceCoins, coins])
 
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
@@ -120,12 +120,12 @@ const Home: FC = (): JSX.Element => {
 						<Grid item sm={6} lg={6} xs={12}>
 							<h3 className={styles.coinName}>
 								{coin.name}
-								{/* <Image
+								<Image
 									src={coin.info_coin.image}
 									alt='icon of coin'
 									width={30}
 									height={30}
-								/> */}
+								/>
 							</h3>
 							<div className={styles.coinDetails}>
 								<h3 className={styles.coinPrice}>${currentPrice}</h3>
