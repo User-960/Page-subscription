@@ -58,6 +58,14 @@ class AuthService {
 
 		return data
 	}
+
+	async getAllWatchlist() {
+		const { data } = await $axiosAuth.get<IWatchlist[]>(
+			`${this.URL_WATCHLIST}/get-elements`
+		)
+
+		return data
+	}
 }
 
 export default new AuthService()

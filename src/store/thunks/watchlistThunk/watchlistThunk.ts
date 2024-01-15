@@ -21,3 +21,19 @@ export const createWatchlistThunk = createAsyncThunk(
 		}
 	}
 )
+
+export const getAllWatchlistThunk = createAsyncThunk(
+	'watchlist/get-elements',
+	async (_: any, { rejectWithValue }) => {
+		try {
+			const userWatchlist = await AuthService.getAllWatchlist()
+			return userWatchlist
+		} catch (error: any) {
+			if (error.response && error.response.data.message) {
+				return rejectWithValue(error.response.data.message)
+			} else {
+				return rejectWithValue(error.message)
+			}
+		}
+	}
+)

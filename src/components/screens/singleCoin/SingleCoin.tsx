@@ -49,7 +49,7 @@ const SingleCoin: FC = (): JSX.Element => {
 				<Grid container spacing={2} className={styles.singleCoin}>
 					<Grid item xs={12} className={styles.container}>
 						<Avatar src={findCoin.image} className={styles.coinIcon} />
-						<Typography variant='h1' className={styles.coinName}>
+						<Typography variant='h2' className={styles.coinName}>
 							{findCoin.name}
 						</Typography>
 					</Grid>
@@ -116,6 +116,55 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
+									Capitalize ($):
+								</Typography>
+								<Typography variant='h2' className={styles.coinPriceDetail}>
+									{findCoin.market_cap.toLocaleString('en-US', {
+										style: 'currency',
+										currency: 'USD'
+									})}
+								</Typography>
+							</Box>
+						</Grid>
+					</Grid>
+
+					<Grid item sm={6} xs={12} className={styles.card}>
+						<Grid
+							className={styles.cardItem}
+							sx={{
+								backgroundColor: `${
+									theme.palette.mode === 'light'
+										? colors.primary.DEFAULT
+										: colors.primary[600]
+								}`,
+								border: `1px solid ${colors.borderColor}`
+							}}
+						>
+							<Box className={styles.container}>
+								<Typography variant='body1' className={styles.coinTitle}>
+									Capitalize rank:
+								</Typography>
+								<Typography variant='h2' className={styles.coinPriceDetail}>
+									{findCoin.market_cap_rank}
+								</Typography>
+							</Box>
+						</Grid>
+					</Grid>
+
+					<Grid item sm={6} xs={12} className={styles.card}>
+						<Grid
+							className={styles.cardItem}
+							sx={{
+								backgroundColor: `${
+									theme.palette.mode === 'light'
+										? colors.primary.DEFAULT
+										: colors.primary[600]
+								}`,
+								border: `1px solid ${colors.borderColor}`
+							}}
+						>
+							<Box className={styles.container}>
+								<Typography variant='body1' className={styles.coinTitle}>
 									Change price (%):
 								</Typography>
 								<Typography
@@ -157,69 +206,6 @@ const SingleCoin: FC = (): JSX.Element => {
 									}
 								>
 									{findCoin.price_change_24h}
-								</Typography>
-							</Box>
-						</Grid>
-					</Grid>
-
-					<Grid item sm={6} xs={12} className={styles.card}>
-						<Grid
-							className={styles.cardItem}
-							sx={{
-								backgroundColor: `${
-									theme.palette.mode === 'light'
-										? colors.primary.DEFAULT
-										: colors.primary[600]
-								}`,
-								border: `1px solid ${colors.borderColor}`
-							}}
-						>
-							<Box className={styles.container}>
-								<Typography variant='body1' className={styles.coinTitle}>
-									Capitalize ($):
-								</Typography>
-								<Typography
-									variant='h2'
-									className={
-										findCoin.price_change_24h > 0
-											? `${styles.coinPriceDetail} ${styles.trendUp}`
-											: `${styles.coinPriceDetail} ${styles.trendDown}`
-									}
-								>
-									{findCoin.market_cap.toLocaleString('en-US', {
-										style: 'currency',
-										currency: 'USD'
-									})}
-								</Typography>
-							</Box>
-						</Grid>
-					</Grid>
-
-					<Grid item sm={6} xs={12} className={styles.card}>
-						<Grid
-							className={styles.cardItem}
-							sx={{
-								backgroundColor: `${
-									theme.palette.mode === 'light'
-										? colors.primary.DEFAULT
-										: colors.primary[600]
-								}`,
-								border: `1px solid ${colors.borderColor}`
-							}}
-						>
-							<Box className={styles.container}>
-								<Typography variant='body1' className={styles.coinTitle}>
-									Capitalize rank:
-								</Typography>
-								<Typography
-									variant='h2'
-									className={
-										findCoin.price_change_24h > 0
-											? `${styles.coinPriceDetail} ${styles.trendUp}`
-											: `${styles.coinPriceDetail} ${styles.trendDown}`
-									}
-								>
-									{findCoin.market_cap_rank}
 								</Typography>
 							</Box>
 						</Grid>

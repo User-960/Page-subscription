@@ -30,3 +30,8 @@ export const useChartPriceCoins = () => {
 	const { chartPriceCoinsData } = useAppSelector(state => state.coins)
 	return chartPriceCoinsData
 }
+
+export const useWatchlist = () => {
+	const { watchlist } = useAppSelector(state => state.watchlist)
+	return watchlist
+}

@@ -1,20 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { IAuthState } from '@/interfaces/auth.interface/auth.interface'
 import { IWatchlistState } from '@/interfaces/watchlist.interface/watchlist.interface'
-import {
-	loginUserThunk,
-	registerUserThunk
-} from '@/store/thunks/authThunk/authThunk'
-import { createWatchlistThunk } from '@/store/thunks/watchlistThunk/watchlistThunk'
+import { getAllWatchlistThunk } from '@/store/thunks/watchlistThunk/watchlistThunk'
 
 const initialState: IWatchlistState = {
-	watchlistArray: [],
+	watchlist: [],
 	isLoading: false
 }
 
 export const watchlistSlice = createSlice({
-	name: 'auth',
+	name: 'watchlist',
 	initialState,
 	reducers: {},
 	extraReducers: builder => {
@@ -23,9 +18,9 @@ export const watchlistSlice = createSlice({
 		// 	state.isLoading = true
 		// })
 		builder.addCase(
-			createWatchlistThunk.fulfilled,
+			getAllWatchlistThunk.fulfilled,
 			(state: IWatchlistState, action) => {
-				state.watchlistArray = action.payload
+				state.watchlist = action.payload
 				state.isLoading = false
 			}
 		)

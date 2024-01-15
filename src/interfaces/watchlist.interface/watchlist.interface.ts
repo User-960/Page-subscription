@@ -10,6 +10,6 @@ export interface IWatchlist {
 }
 
 export interface IWatchlistState {
-	watchlistArray: IWatchlist[]
+	watchlist: IWatchlist[]
 	isLoading: boolean
 }

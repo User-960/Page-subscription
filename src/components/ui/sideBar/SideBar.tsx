@@ -82,9 +82,15 @@ const SideBar: FC<ISideBarProps> = ({
 						sx={{ borderBottom: `1px solid ${colors.borderColor}` }}
 					>
 						<div className={styles.container}>
-							<Box className={styles.brand} onClick={() => push('/')}>
-								<Image src={Logo} alt='logo' className={styles.logo} />
+							<Box className={styles.brand}>
+								<Image
+									src={Logo}
+									alt='logo'
+									className={styles.logo}
+									onClick={() => push('/')}
+								/>
 								<Typography
+									onClick={() => push('/')}
 									variant='h1'
 									color={
 										theme.palette.mode === 'light'
