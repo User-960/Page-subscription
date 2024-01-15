@@ -1,4 +1,9 @@
-import { Button, Grid, Typography, useTheme } from '@mui/material'
+import {
+	Button,
+	Grid,
+	Typography,
+	useTheme
+} from '@mui/material'
 import React, { FC, useEffect, useState } from 'react'
 
 import TopPriceTable from '@/components/ui/topPriceTable/TopPriceTable'
