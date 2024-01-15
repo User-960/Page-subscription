@@ -40,8 +40,8 @@ const SearchBlock: FC = (): JSX.Element => {
 		<Stack spacing={2} sx={{ width: 217, margin: '0px 15px' }}>
 			<Autocomplete
 				id='search-coin'
-				onChange={(e: any, value: string | null) => {
-					push(`/coin/${value}`)
+				onChange={(e: any, value: string) => {
+					push(`/coin/${value?.split(' ')[0]}`)
 					setSelectedCoin('')
 				}}
 				value={selectedCoin}
