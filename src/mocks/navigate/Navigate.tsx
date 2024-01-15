@@ -23,17 +23,17 @@ export const navMenu: INavMenuItem[] = [
 		name: 'Favorites',
 		icon: <AutoGraphOutlinedIcon />,
 		path: '/watchlist'
-	},
-	{
-		id: 3,
-		name: 'News',
-		icon: <MenuBookOutlinedIcon />,
-		path: '/news'
-	},
-	{
-		id: 4,
-		name: 'Settings',
-		icon: <SettingsOutlinedIcon />,
-		path: '/settings'
 	}
+	// {
+	// 	id: 3,
+	// 	name: 'News',
+	// 	icon: <MenuBookOutlinedIcon />,
+	// 	path: '/news'
+	// },
+	// {
+	// 	id: 4,
+	// 	name: 'Settings',
+	// 	icon: <SettingsOutlinedIcon />,
+	// 	path: '/settings'
+	// }
 ]

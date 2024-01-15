@@ -24,7 +24,7 @@ const ErrorBlock: FC = (): JSX.Element => {
 				}}
 			>
 				<p>
-					Server error. <br />
+					No data. <br />
 					Wait one minute!
 				</p>
 				<LoadingButton loading variant='outlined'>
