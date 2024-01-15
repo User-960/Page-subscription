@@ -8,7 +8,8 @@ import {
 	TextField,
 	useTheme
 } from '@mui/material'
-import React, { FC } from 'react'
+import { useRouter } from 'next/router'
+import React, { FC, useEffect, useState } from 'react'
 
 import { useCoins } from '@/components/hooks/useApp'
 
@@ -16,23 +17,14 @@ import styles from './SearchBlock.module.scss'
 import { tokens } from '@/theme/theme'
 
 const SearchBlock: FC = (): JSX.Element => {
+	const [selectedCoin, setSelectedCoin] = useState<string>('')
+
+	const { push } = useRouter()
+
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 
 	const coins = useCoins()
-	const top100Films = [
-		{ title: 'The Shawshank Redemption', year: 1994 },
-		{ title: 'The Godfather', year: 1972 },
-		{ title: 'The Godfather: Part II', year: 1974 },
-		{ title: 'The Dark Knight', year: 2008 },
-		{ title: '12 Angry Men', year: 1957 },
-		{ title: "Schindler's List", year: 1993 },
-		{ title: 'Pulp Fiction', year: 1994 },
-		{
-			title: 'The Lord of the Rings: The Return of the King',
-			year: 2003
-		}
-	]
 
 	return (
 		// <Grid
@@ -48,6 +40,11 @@ const SearchBlock: FC = (): JSX.Element => {
 		<Stack spacing={2} sx={{ width: 217, margin: '0px 15px' }}>
 			<Autocomplete
 				id='search-coin'
+				onChange={(e: any, value: string | null) => {
+					push(`/coin/${value}`)
+					setSelectedCoin('')
+				}}
+				value={selectedCoin}
 				freeSolo
 				disableClearable
 				renderInput={element => (
@@ -57,7 +54,9 @@ const SearchBlock: FC = (): JSX.Element => {
 						InputProps={{ ...element.InputProps, type: 'search' }}
 					/>
 				)}
-				options={coins.map(coin => coin.name)}
+				options={coins.map(
+					coin => `${coin.name} (${coin.symbol.toUpperCase()})`
+				)}
 			/>
 		</Stack>
 	)

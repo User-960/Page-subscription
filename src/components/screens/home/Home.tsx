@@ -82,14 +82,14 @@ const Home: FC = (): JSX.Element => {
 	const fetchDataRef = useRef(false)
 
 	// useEffect(() => {
-	// 	if (fetchDataRef.current) {
+	// 	if (fetchDataRef.current && chartPriceCoins && coins) {
 	// 		return
 	// 	} else {
 	// 		fetchDataRef.current = true
 	// 		fetchData(testCoins)
 	// 		dispatch(getTopPriceThunk(''))
 	// 	}
-	// }, [testCoins, fetchData, dispatch])
+	// }, [testCoins, fetchData, dispatch, chartPriceCoins, coins])
 
 	const renderChartBlock = filteredChartPriceCoins.map(
 		(coin: ICoinChartData) => {
