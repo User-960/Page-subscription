@@ -1,6 +1,13 @@
-import { Box, Grid, Typography, useTheme } from '@mui/material'
+import { Box, Button, Grid, Typography, useTheme } from '@mui/material'
 import Image from 'next/image'
-import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react'
+import React, {
+	FC,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState
+} from 'react'
 
 import AreaChart from '@/components/ui/charts/areaChart/AreaChart'
 import LineChart from '@/components/ui/charts/lineChart/LineChart'
@@ -51,6 +58,17 @@ const Home: FC = (): JSX.Element => {
 		(value: ICoinChartData, index: number, self: ICoinChartData[]) =>
 			index === self.findIndex(t => t.name === value.name)
 	)
+
+	// Pagination
+	const [currentPage] = useState<number>(1)
+	const [coinsPerPage, setCoinsPerPage] = useState<number>(10)
+
+	const lastCoinIndex = currentPage * coinsPerPage
+	const firstCoinIndex = lastCoinIndex - coinsPerPage
+	const currentCoins = coins?.slice(firstCoinIndex, lastCoinIndex)
+
+	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
+	// ----
 
 	const fetchData = useCallback(
 		(data: string[]) => {
@@ -180,8 +198,20 @@ const Home: FC = (): JSX.Element => {
 						border: `1px solid ${colors.borderColor}`
 					}}
 				>
-					<Grid item xs={12} sm={12} lg={12}>
-						<TopPriceTable coins={coins.slice(0, 15)} />
+					<Grid item xs={12} sm={12} lg={12} className={styles.tableContainer}>
+						<TopPriceTable coins={currentCoins} />
+
+						<Button
+							onClick={() => nextCoins()}
+							variant='contained'
+							sx={{
+								margin: '15px auto',
+								width: '160px',
+								backgroundColor: '#1900d5 !important'
+							}}
+						>
+							Next Coins
+						</Button>
 					</Grid>
 				</Grid>
 			</Box>

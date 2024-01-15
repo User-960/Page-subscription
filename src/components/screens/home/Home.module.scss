@@ -36,6 +36,12 @@
 	line-height: 48px;
 }
 
+.tableContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .priceTrend {
 	max-width: 95px;
 	display: flex;
