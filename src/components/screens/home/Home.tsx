@@ -45,6 +45,7 @@ const Home: FC = (): JSX.Element => {
 		title: 'Home',
 		description: 'Home page'
 	}
+
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 
@@ -82,12 +83,19 @@ const Home: FC = (): JSX.Element => {
 	const fetchDataRef = useRef(false)
 
 	// useEffect(() => {
-	// 	if (fetchDataRef.current && chartPriceCoins && coins) {
+	// 	if (fetchDataRef.current) {
+	// 		console.log(1)
 	// 		return
 	// 	} else {
-	// 		fetchDataRef.current = true
-	// 		fetchData(testCoins)
-	// 		dispatch(getTopPriceThunk(''))
+	// 		if (chartPriceCoins.length === 0 && coins.length === 0) {
+	// 			console.log(2)
+	// 			fetchDataRef.current = true
+	// 			fetchData(testCoins)
+	// 			dispatch(getTopPriceThunk(''))
+	// 		} else {
+	// 			console.log(3)
+	// 			return
+	// 		}
 	// 	}
 	// }, [testCoins, fetchData, dispatch, chartPriceCoins, coins])
 
