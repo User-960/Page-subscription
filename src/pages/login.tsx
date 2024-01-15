@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -13,7 +14,10 @@ export const LoginPage = () => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		if (localStorage.getItem(EN_USER.FIRST_NAME)) {
+		if (
+			localStorage.getItem(EN_USER.FIRST_NAME) &&
+			Cookies.get(EN_USER.TOKEN)
+		) {
 			dispatch(login(localStorage.getItem(EN_USER.FIRST_NAME)))
 			push('/')
 		}

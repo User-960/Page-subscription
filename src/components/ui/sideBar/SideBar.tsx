@@ -12,6 +12,7 @@ import {
 	Typography,
 	useTheme
 } from '@mui/material'
+import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
@@ -52,6 +53,7 @@ const SideBar: FC<ISideBarProps> = ({
 
 	const logOutFunc = () => {
 		localStorage.removeItem(EN_USER.FIRST_NAME)
+		Cookies.remove(EN_USER.TOKEN)
 		dispatch(logout())
 		push('/login')
 	}
