@@ -47,4 +47,5 @@ export interface ICoinsState {
 	coins: ICoin[]
 	favoriteCoins: ICoin[]
 	chartPriceCoinsData: ICoinChartData[]
+	isLoading: boolean
 }

@@ -22,6 +22,7 @@ import Logo from '../../../assets/images/SideBar/logo.svg'
 import SearchBlock from '../searchBlock/SearchBlock'
 
 import styles from './SideBar.module.scss'
+import { EN_USER } from '@/config/app.constants'
 import { INavMenuItem, navMenu } from '@/mocks/navigate/Navigate'
 import { logout } from '@/store/slice/auth/authSlice'
 import { tokens } from '@/theme/theme'
@@ -50,6 +51,7 @@ const SideBar: FC<ISideBarProps> = ({
 	const dispatch = useAppDispatch()
 
 	const logOutFunc = () => {
+		localStorage.removeItem(EN_USER.FIRST_NAME)
 		dispatch(logout())
 		push('/login')
 	}

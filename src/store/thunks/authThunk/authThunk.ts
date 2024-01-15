@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
+import { EN_USER } from '@/config/app.constants'
 import {
 	IAuthFormFieldsLogin,
 	IAuthFormFieldsRegister
@@ -34,7 +35,7 @@ export const registerUserThunk = createAsyncThunk(
 				data.password,
 				data.repeatPassword
 			)
-			localStorage.setItem('name', `${user.user.firstName}`)
+			localStorage.setItem(EN_USER.FIRST_NAME, `${user.user.firstName}`)
 			return user
 		} catch (error: any) {
 			if (error.response && error.response.data.message) {

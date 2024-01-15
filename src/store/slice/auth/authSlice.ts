@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { EN_USER } from '@/config/app.constants'
 import { IAuthState } from '@/interfaces/auth.interface/auth.interface'
 import {
 	loginUserThunk,
@@ -8,7 +9,8 @@ import {
 
 const initialState: IAuthState = {
 	userData: null,
-	isLogged: true,
+	userName: null,
+	isLogged: false,
 	isLoading: false
 }
 
@@ -16,6 +18,11 @@ export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
+		login(state: IAuthState, action) {
+			console.log(action)
+			state.userName = localStorage.getItem(EN_USER.FIRST_NAME)
+			state.isLogged = true
+		},
 		logout(state: IAuthState) {
 			state.userData = null
 			state.isLogged = false
@@ -28,6 +35,7 @@ export const authSlice = createSlice({
 		})
 		builder.addCase(loginUserThunk.fulfilled, (state: IAuthState, action) => {
 			state.userData = action.payload
+			state.userName = action.payload.user.firstName
 			state.isLogged = true
 			state.isLoading = false
 		})
@@ -44,6 +52,7 @@ export const authSlice = createSlice({
 			registerUserThunk.fulfilled,
 			(state: IAuthState, action) => {
 				state.userData = action.payload
+				state.userName = action.payload.user.firstName
 				state.isLogged = true
 				state.isLoading = false
 			}
@@ -55,5 +64,5 @@ export const authSlice = createSlice({
 	}
 })
 
-export const { logout } = authSlice.actions
+export const { login, logout } = authSlice.actions
 export default authSlice.reducer

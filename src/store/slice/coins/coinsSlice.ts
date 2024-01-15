@@ -10,7 +10,8 @@ import {
 const initialState: ICoinsState = {
 	coins: [],
 	favoriteCoins: [],
-	chartPriceCoinsData: []
+	chartPriceCoinsData: [],
+	isLoading: false
 }
 
 export const coinsSlice = createSlice({
@@ -18,24 +19,25 @@ export const coinsSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: builder => {
-		// builder.addCase(
-		// 	favoriteCoinsThunk.pending,
-		// 	(state: ICoinsState, action) => {
-		// 		state.isLoading = true
-		// 	}
-		// )
+		builder.addCase(
+			favoriteCoinsThunk.pending,
+			(state: ICoinsState, action) => {
+				state.isLoading = true
+			}
+		)
 		builder.addCase(
 			favoriteCoinsThunk.fulfilled,
 			(state: ICoinsState, action) => {
 				state.favoriteCoins = action.payload
+				state.isLoading = false
 			}
 		)
-		// builder.addCase(
-		// 	favoriteCoinsThunk.rejected,
-		// 	(state: ICoinsState, action) => {
-		// 		state.isLoading = false
-		// 	}
-		// )
+		builder.addCase(
+			favoriteCoinsThunk.rejected,
+			(state: ICoinsState, action) => {
+				state.isLoading = false
+			}
+		)
 
 		builder.addCase(
 			chartPriceCoinsThunk.fulfilled,

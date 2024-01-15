@@ -31,7 +31,7 @@ interface ITopBarProps {
 }
 
 const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
-	const userData = useAppSelector(state => state.auth.userData)
+	const userAuth = useAppSelector(state => state.auth)
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()
@@ -52,11 +52,7 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 						<MenuOutlinedIcon className={styles.menuIcon} />
 					</IconButton>
 					<Grid className={styles.nameBlock}>
-						<Typography variant='h3'>
-							Welcome,
-							{/* {localStorage.getItem('name') || userData?.user.firstName} */}
-							{userData?.user.firstName}
-						</Typography>
+						<Typography variant='h3'>Welcome, {userAuth.userName}</Typography>
 						<Typography
 							className={styles.dataText}
 							sx={{ color: `${theme.palette.secondary.main}` }}

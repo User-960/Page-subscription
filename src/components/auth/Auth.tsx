@@ -76,15 +76,21 @@ const Auth: FC = (): JSX.Element => {
 
 	return (
 		<Layout meta={meta}>
-			<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
-				<Box className={styles.container} padding={4} borderRadius={5}>
-					{pathname === '/login' ? (
-						<Login register={register} errors={errors} isLoading={loading} />
-					) : pathname === '/register' ? (
-						<Register register={register} errors={errors} isLoading={loading} />
-					) : null}
-				</Box>
-			</form>
+			{!auth && (
+				<form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
+					<Box className={styles.container} padding={4} borderRadius={5}>
+						{pathname === '/login' ? (
+							<Login register={register} errors={errors} isLoading={loading} />
+						) : pathname === '/register' ? (
+							<Register
+								register={register}
+								errors={errors}
+								isLoading={loading}
+							/>
+						) : null}
+					</Box>
+				</form>
+			)}
 		</Layout>
 	)
 }

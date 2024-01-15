@@ -4,5 +4,6 @@ export const SERVER_URL = 'http://localhost:5000'
 export const COINGECKO_URL = 'https://api.coingecko.com'
 
 export enum EN_USER {
-	TOKEN = 'secretToken'
+	TOKEN = 'secretToken',
+	FIRST_NAME = 'name'
 }
