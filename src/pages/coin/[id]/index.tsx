@@ -1,4 +1,3 @@
-import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 
