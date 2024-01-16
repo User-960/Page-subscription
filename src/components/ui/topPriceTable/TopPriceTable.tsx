@@ -26,9 +26,13 @@ import { deleteCoin, saveCoin } from '@/store/slice/watchlist/watchlistSlice'
 const cn = require('clsx')
 interface ITopPriceListProps {
 	coins: ICoin[]
+	setIsOpenSnackbar: () => void
 }
 
-const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
+const TopPriceTable: FC<ITopPriceListProps> = ({
+	coins,
+	setIsOpenSnackbar
+}): JSX.Element => {
 	const watchlist = useWatchlist()
 	const dispatch = useAppDispatch()
 	const [isSortDownPrice, setIsSortDownPrice] = useState<boolean | null>(null)
@@ -106,6 +110,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 		if (findCoin) {
 			dispatch(deleteCoin(data.assetId))
 		} else {
+			setIsOpenSnackbar()
 			dispatch(saveCoin(data))
 		}
 	}

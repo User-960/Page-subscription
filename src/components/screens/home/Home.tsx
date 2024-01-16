@@ -90,14 +90,15 @@ const Home: FC = (): JSX.Element => {
 
 	const addCoinInWatchlist = () => {
 		setSeverity('success')
-		setIsOpen(true)
 		setTimeout(() => {
 			setIsOpen(false)
 		}, 2000)
 	}
 
 	useEffect(() => {
-		addCoinInWatchlist()
+		if (isOpen) {
+			addCoinInWatchlist()
+		}
 	}, [watchlist])
 	// ----
 
@@ -250,7 +251,10 @@ const Home: FC = (): JSX.Element => {
 					}}
 				>
 					<Grid item xs={12} sm={12} lg={12} className={styles.tableContainer}>
-						<TopPriceTable coins={currentCoins} />
+						<TopPriceTable
+							coins={currentCoins}
+							setIsOpenSnackbar={() => setIsOpen(true)}
+						/>
 
 						{coins.length > 10 && coinsPerPage <= currentCoins.length && (
 							<Button
