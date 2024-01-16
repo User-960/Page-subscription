@@ -8,14 +8,27 @@ import {
 } from '@/store/thunks/watchlistThunk/watchlistThunk'
 
 const initialState: IWatchlistState = {
-	watchlist: mockWatchlist,
+	watchlist: [],
 	isLoading: false
 }
 
 export const watchlistSlice = createSlice({
 	name: 'watchlist',
 	initialState,
-	reducers: {},
+	reducers: {
+		saveCoin(state: IWatchlistState, action) {
+			state.watchlist.push(action.payload)
+		},
+		deleteCoin(state: IWatchlistState, action) {
+			const findCoinIndex = state.watchlist.findIndex(
+				coin => coin.assetId === action.payload
+			)
+
+			if (findCoinIndex !== -1) {
+				state.watchlist.splice(findCoinIndex, 1)
+			}
+		}
+	},
 	extraReducers: builder => {
 		builder.addCase(
 			createWatchlistThunk.fulfilled,
@@ -41,5 +54,5 @@ export const watchlistSlice = createSlice({
 		// })
 	}
 })
-
+export const { saveCoin, deleteCoin } = watchlistSlice.actions
 export default watchlistSlice.reducer

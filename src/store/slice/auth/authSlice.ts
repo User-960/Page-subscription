@@ -19,7 +19,6 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		login(state: IAuthState, action) {
-			console.log(action)
 			state.userName = localStorage.getItem(EN_USER.FIRST_NAME)
 			state.isLogged = true
 		},

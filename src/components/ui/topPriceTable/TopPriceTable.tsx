@@ -1,5 +1,6 @@
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import StarIcon from '@mui/icons-material/Star'
 import {
 	Box,
 	Paper,
@@ -13,18 +14,25 @@ import {
 import Image from 'next/image'
 import React, { FC, useEffect, useState } from 'react'
 
+import { useAppDispatch, useWatchlist } from '@/components/hooks/useApp'
+
 import TrendDown from '../../../assets/images/Chart/trendDown.svg'
 import TrendUp from '../../../assets/images/Chart/trendUp.svg'
 import ErrorBlock from '../errorBlock/ErrorBlock'
 
 import styles from './TopPriceTable.module.scss'
 import { ICoin } from '@/interfaces/coins.interface/coins.interface'
+import { IWatchlist } from '@/interfaces/watchlist.interface/watchlist.interface'
+import { deleteCoin, saveCoin } from '@/store/slice/watchlist/watchlistSlice'
 
+const cn = require('clsx')
 interface ITopPriceListProps {
 	coins: ICoin[]
 }
 
 const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
+	const watchlist = useWatchlist()
+	const dispatch = useAppDispatch()
 	const [isSortDownPrice, setIsSortDownPrice] = useState<boolean | null>(null)
 	const [isSortDownDollars, setIsSortDownDollars] = useState<boolean | null>(
 		null
@@ -89,6 +97,21 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 		sortCoinsPriceList()
 	}, [isSortDownPrice])
 
+	const findCoinWatchlist = (data: IWatchlist) => {
+		const findCoin = watchlist.find(coin => coin.assetId === data.assetId)
+		return findCoin ? true : false
+	}
+
+	const saveCoinWatchlist = (data: IWatchlist) => {
+		const findCoin = findCoinWatchlist(data)
+
+		if (findCoin) {
+			dispatch(deleteCoin(data.assetId))
+		} else {
+			dispatch(saveCoin(data))
+		}
+	}
+
 	return (
 		<>
 			<TableContainer component={Paper} className={styles.tableContainer}>
@@ -97,6 +120,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 						<TableHead>
 							<TableRow>
 								<TableCell>Name</TableCell>
+
 								<TableCell align='right'>
 									Price{' '}
 									<button
@@ -108,6 +132,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 										{isSortDownPrice ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 									</button>
 								</TableCell>
+
 								<TableCell align='right'>
 									Change ($){' '}
 									<button
@@ -123,6 +148,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 										)}
 									</button>
 								</TableCell>
+
 								<TableCell align='right'>
 									Change (%){''}
 									<button
@@ -138,6 +164,8 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 										)}
 									</button>
 								</TableCell>
+
+								<TableCell align='right'></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -181,6 +209,28 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 										>
 											<p>{coin.price_change_percentage_24h.toFixed(2)}</p>
 										</Box>
+									</TableCell>
+
+									<TableCell align='right'>
+										<StarIcon
+											className={styles.starIcon}
+											sx={{
+												color: findCoinWatchlist({
+													assetId: coin.id,
+													name: coin.name,
+													user: 11
+												})
+													? '#ef8e19'
+													: '#737373'
+											}}
+											onClick={() =>
+												saveCoinWatchlist({
+													assetId: coin.id,
+													name: coin.name,
+													user: 11
+												})
+											}
+										/>
 									</TableCell>
 								</TableRow>
 							))}

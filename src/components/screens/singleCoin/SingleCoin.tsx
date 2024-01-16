@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import {
 	useAppDispatch,
@@ -23,6 +23,8 @@ import Layout from '@/components/layout/Layout'
 import { IMeta } from '@/components/seo/meta.interface'
 
 import styles from './SingleCoin.module.scss'
+import { IWatchlist } from '@/interfaces/watchlist.interface/watchlist.interface'
+import { deleteCoin, saveCoin } from '@/store/slice/watchlist/watchlistSlice'
 import { createWatchlistThunk } from '@/store/thunks/watchlistThunk/watchlistThunk'
 import { tokens } from '@/theme/theme'
 
@@ -39,9 +41,6 @@ const SingleCoin: FC = (): JSX.Element => {
 		description: `${id} page`
 	}
 
-	const [isOpen, setIsOpen] = useState<boolean>(false)
-	const [severity, setSeverity] = useState<AlertColor>('success')
-
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 
@@ -56,33 +55,69 @@ const SingleCoin: FC = (): JSX.Element => {
 		})
 	})
 
-	const handleCreateRecord = () => {
-		if (!coinInWatchList.find(coin => coin.name === findCoin?.name)) {
-			try {
-				const data = {
-					name: '',
-					assetId: ''
-				}
+	// Coin add in watchlist
+	const findCoinWatchlist = (data: IWatchlist) => {
+		const findCoin = watchlist.find(
+			(coin: IWatchlist) => coin.assetId === data.assetId
+		)
+		return findCoin ? true : false
+	}
 
-				if (findCoin?.name && findCoin?.id) {
-					data.name = findCoin.name
-					data.assetId = findCoin.id
-					dispatch(createWatchlistThunk(data))
-					setSeverity('success')
-					setIsOpen(true)
-					setTimeout(() => {
-						setIsOpen(false)
-					}, 3000)
-				}
-			} catch (error) {
-				setSeverity('error')
-				setIsOpen(true)
-				setTimeout(() => {
-					setIsOpen(false)
-				}, 3000)
-			}
+	const [isOpen, setIsOpen] = useState<boolean>(false)
+	const [severity, setSeverity] = useState<AlertColor>('info')
+	const watchlist = useWatchlist()
+
+	const saveCoinWatchlist = (data: IWatchlist) => {
+		const findCoin = findCoinWatchlist(data)
+
+		if (findCoin) {
+			dispatch(deleteCoin(data.assetId))
+		} else {
+			dispatch(saveCoin(data))
 		}
 	}
+
+	const addCoinInWatchlist = () => {
+		setSeverity('success')
+		setTimeout(() => {
+			setIsOpen(false)
+		}, 2000)
+	}
+
+	useEffect(() => {
+		if (isOpen) {
+			addCoinInWatchlist()
+		}
+	}, [watchlist])
+	// ----
+
+	// const handleCreateRecord = () => {
+	// 	if (!coinInWatchList.find(coin => coin.name === findCoin?.name)) {
+	// 		try {
+	// 			const data = {
+	// 				name: '',
+	// 				assetId: ''
+	// 			}
+
+	// 			if (findCoin?.name && findCoin?.id) {
+	// 				data.name = findCoin.name
+	// 				data.assetId = findCoin.id
+	// 				dispatch(createWatchlistThunk(data))
+	// 				setSeverity('success')
+	// 				setIsOpen(true)
+	// 				setTimeout(() => {
+	// 					setIsOpen(false)
+	// 				}, 3000)
+	// 			}
+	// 		} catch (error) {
+	// 			setSeverity('error')
+	// 			setIsOpen(true)
+	// 			setTimeout(() => {
+	// 				setIsOpen(false)
+	// 			}, 3000)
+	// 		}
+	// 	}
+	// }
 
 	return (
 		<Layout meta={meta}>
@@ -334,7 +369,14 @@ const SingleCoin: FC = (): JSX.Element => {
 						</Button>
 
 						<Button
-							onClick={handleCreateRecord}
+							onClick={() => {
+								saveCoinWatchlist({
+									assetId: findCoin.id,
+									name: findCoin.name,
+									user: 11
+								})
+								setIsOpen(true)
+							}}
 							variant='outlined'
 							color='success'
 							className={
@@ -344,14 +386,16 @@ const SingleCoin: FC = (): JSX.Element => {
 							}
 						>
 							{coinInWatchList.find(coin => coin.name === findCoin.name)
-								? 'Coin is in your Watchlist'
+								? 'Delete coin from Watchlist'
 								: 'Add to Watchlist'}
 						</Button>
 					</Grid>
 
 					<Snackbar open={isOpen} autoHideDuration={6000}>
 						<Alert severity={severity} sx={{ width: '100%' }}>
-							The coin has been added to your watchlist!
+							{coinInWatchList.find(coin => coin.name === findCoin.name)
+								? 'The coin has been added to your watchlist!'
+								: 'The coin has been deleted from your watchlist!'}
 						</Alert>
 					</Snackbar>
 				</Grid>

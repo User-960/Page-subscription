@@ -1,4 +1,12 @@
-import { Box, Button, Grid, useTheme } from '@mui/material'
+import {
+	Alert,
+	AlertColor,
+	Box,
+	Button,
+	Grid,
+	Snackbar,
+	useTheme
+} from '@mui/material'
 import Image from 'next/image'
 import React, {
 	FC,
@@ -18,7 +26,8 @@ import {
 	useAppDispatch,
 	useChartPriceCoins,
 	useCoins,
-	useCoinsFavorite
+	useCoinsFavorite,
+	useWatchlist
 } from '@/components/hooks/useApp'
 
 import Layout from '@/components/layout/Layout'
@@ -72,6 +81,24 @@ const Home: FC = (): JSX.Element => {
 	const currentCoins = coins?.slice(firstCoinIndex, lastCoinIndex)
 
 	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
+	// ----
+
+	// Coin add in watchlist
+	const [isOpen, setIsOpen] = useState<boolean>(false)
+	const [severity, setSeverity] = useState<AlertColor>('success')
+	const watchlist = useWatchlist()
+
+	const addCoinInWatchlist = () => {
+		setSeverity('success')
+		setIsOpen(true)
+		setTimeout(() => {
+			setIsOpen(false)
+		}, 2000)
+	}
+
+	useEffect(() => {
+		addCoinInWatchlist()
+	}, [watchlist])
 	// ----
 
 	const fetchAreaChartCoins = useCallback(
@@ -240,6 +267,12 @@ const Home: FC = (): JSX.Element => {
 						)}
 					</Grid>
 				</Grid>
+
+				<Snackbar open={isOpen} autoHideDuration={6000}>
+					<Alert severity={severity} sx={{ width: '100%' }}>
+						The coin has been added to your watchlist!
+					</Alert>
+				</Snackbar>
 			</Box>
 		</Layout>
 	)
