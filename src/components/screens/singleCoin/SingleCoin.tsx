@@ -28,13 +28,15 @@ import { tokens } from '@/theme/theme'
 
 const SingleCoin: FC = (): JSX.Element => {
 	const { back } = useRouter()
+
 	const params = useParams()
+	const id: string | string[] = params?.id
 
 	const dispatch = useAppDispatch()
 
 	const meta: IMeta = {
-		title: `${params.id}`,
-		description: `${params.id} page`
+		title: `${id}`,
+		description: `${id} page`
 	}
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -46,7 +48,7 @@ const SingleCoin: FC = (): JSX.Element => {
 	const coins = useCoins()
 	const watchlistArray = useWatchlist()
 
-	const findCoin = coins.find(coin => coin.name === 'Bitcoin')
+	const findCoin = coins.find(coin => coin.name === id)
 
 	const coinInWatchList = coins.filter(coin => {
 		return watchlistArray.some((otherElement: any) => {
