@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { IWatchlistState } from '@/interfaces/watchlist.interface/watchlist.interface'
+import { mockWatchlist } from '@/mocks/watchlist/watchlist'
 import {
 	createWatchlistThunk,
 	getAllWatchlistThunk
 } from '@/store/thunks/watchlistThunk/watchlistThunk'
 
 const initialState: IWatchlistState = {
-	watchlist: [],
+	watchlist: mockWatchlist,
 	isLoading: false
 }
 

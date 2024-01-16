@@ -1,9 +1,4 @@
-import {
-	Button,
-	Grid,
-	Typography,
-	useTheme
-} from '@mui/material'
+import { Button, Grid, Typography, useTheme } from '@mui/material'
 import React, { FC, useEffect, useState } from 'react'
 
 import TopPriceTable from '@/components/ui/topPriceTable/TopPriceTable'
@@ -36,17 +31,6 @@ const Watchlist: FC = (): JSX.Element => {
 	const watchlistArray = useWatchlist()
 	const coins = useCoins()
 
-	// Pagination
-	const [currentPage] = useState<number>(1)
-	const [coinsPerPage, setCoinsPerPage] = useState<number>(10)
-
-	const lastCoinIndex = currentPage * coinsPerPage
-	const firstCoinIndex = lastCoinIndex - coinsPerPage
-	const currentCoins = coins?.slice(firstCoinIndex, lastCoinIndex)
-
-	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
-	// ----
-
 	useEffect(() => {
 		if (coins.length === 0) {
 			console.log(5)
@@ -66,6 +50,17 @@ const Watchlist: FC = (): JSX.Element => {
 			return otherElement.assetId === coin.id
 		})
 	})
+
+	// Pagination
+	const [currentPage] = useState<number>(1)
+	const [coinsPerPage, setCoinsPerPage] = useState<number>(10)
+
+	const lastCoinIndex = currentPage * coinsPerPage
+	const firstCoinIndex = lastCoinIndex - coinsPerPage
+	const currentCoins = filteredArray?.slice(firstCoinIndex, lastCoinIndex)
+
+	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
+	// ----
 
 	return (
 		<Layout meta={meta}>
@@ -104,7 +99,7 @@ const Watchlist: FC = (): JSX.Element => {
 					}}
 				>
 					<Grid item xs={12} sm={12} lg={12} className={styles.tableContainer}>
-						<TopPriceTable coins={filteredArray} />
+						<TopPriceTable coins={currentCoins} />
 
 						{filteredArray.length > 10 && (
 							<Button
