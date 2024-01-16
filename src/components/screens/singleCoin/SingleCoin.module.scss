@@ -22,8 +22,8 @@
 .card {
 	display: flex !important;
 	justify-content: center !important;
-	min-width: 320px;
-	margin: 0 auto;
+	min-width: 320px !important;
+	margin: 0 auto !important;
 }
 
 .cardItem {
