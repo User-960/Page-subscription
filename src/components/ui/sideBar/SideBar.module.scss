@@ -30,22 +30,22 @@
 }
 
 .navItemBtn {
-	border-radius: 4px;
+	border-radius: 4px !important;
 	&:hover {
-		color: $white;
-		background-color: $blue;
+		color: $white !important;
+		background-color: $blue !important;
 
 		& .iconNavItem {
-			color: $white;
+			color: $white !important;
 		}
 	}
 }
 
 .navItemBtnActive {
-	color: $white;
-	background-color: $blue;
+	color: $white !important;
+	background-color: $blue !important;
 
 	& .iconNavItem {
-		color: $white;
+		color: $white !important;
 	}
 }

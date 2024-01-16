@@ -37,9 +37,9 @@
 }
 
 .tableContainer {
-	display: flex;
+	display: flex !important;
 	flex-direction: column !important;
-	justify-content: center;
+	justify-content: center !important;
 }
 
 .priceTrend {
