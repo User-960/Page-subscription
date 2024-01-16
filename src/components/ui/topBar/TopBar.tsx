@@ -14,11 +14,16 @@ import {
 	useTheme
 } from '@mui/material'
 import moment from 'moment'
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
 import SearchBlock from '@/components/ui/searchBlock/SearchBlock'
 
-import { useAppSelector } from '@/components/hooks/useApp'
+import {
+	useAppSelector,
+	useNews,
+	useWatchlist
+} from '@/components/hooks/useApp'
 import { useCoins } from '@/components/hooks/useApp'
 import { useColorMode } from '@/components/hooks/useColorMode'
 
@@ -31,12 +36,20 @@ interface ITopBarProps {
 }
 
 const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
+	const { push, pathname } = useRouter()
+	const news = useNews()
 	const userAuth = useAppSelector(state => state.auth)
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 	const colorMode: any = useColorMode()
 	const coins = useCoins()
 	const isNoneMobile = useMediaQuery('(min-width:720px)')
+
+	const openNews = () => {
+		if (news.length !== 0 && pathname !== '/news') {
+			push('/news')
+		}
+	}
 
 	return (
 		<AppBar
@@ -81,8 +94,11 @@ const TopBar: FC<ITopBarProps> = ({ isOpen, setIsOpen }): JSX.Element => {
 							)}
 						</IconButton>
 
-						<IconButton>
+						<IconButton onClick={openNews}>
 							<NotificationsNoneIcon />
+							{news.length !== 0 && pathname !== '/news' && (
+								<div className={styles.notiRed}></div>
+							)}
 						</IconButton>
 					</Grid>
 
