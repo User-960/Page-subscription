@@ -51,6 +51,9 @@
 	font-size: 20px;
 	font-weight: 600;
 	margin-right: 12px;
+	& span {
+		margin-right: 8px;
+	}
 }
 
 .coinPriceDetail {
@@ -72,9 +75,9 @@
 }
 
 .cardBtn {
-	width: 160px;
+	width: 160px !important;
 	/* background-color: #1900d5 !important; */
-	margin: 20px 15px 10px 15px;
+	margin: 20px 15px 10px 15px !important;
 }
 
 .btnNoActive {

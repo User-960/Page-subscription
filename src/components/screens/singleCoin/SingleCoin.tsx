@@ -131,7 +131,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Price:{' '}
+									<span>Price:</span>
 								</Typography>
 								<Typography variant='h2' className={styles.coinPriceDetail}>
 									{findCoin.current_price.toLocaleString('en-US', {
@@ -157,7 +157,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Capitalize ($):{' '}
+									<span>Capitalize ($):</span>
 								</Typography>
 								<Typography variant='h2' className={styles.coinPriceDetail}>
 									{findCoin.market_cap.toLocaleString('en-US', {
@@ -183,7 +183,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Capitalize rank:{' '}
+									<span>Capitalize rank:</span>
 								</Typography>
 								<Typography variant='h2' className={styles.coinPriceDetail}>
 									{findCoin.market_cap_rank}
@@ -206,7 +206,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Change price (%):{' '}
+									<span>Change price (%):</span>
 								</Typography>
 								<Typography
 									variant='h2'
@@ -236,7 +236,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Change price ($):{' '}
+									<span>Change price ($):</span>
 								</Typography>
 								<Typography
 									variant='h2'
@@ -266,7 +266,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Change capitalize (%):{' '}
+									<span>Change capitalize (%):</span>
 								</Typography>
 								<Typography
 									variant='h2'
@@ -296,7 +296,7 @@ const SingleCoin: FC = (): JSX.Element => {
 						>
 							<Box className={styles.container}>
 								<Typography variant='body1' className={styles.coinTitle}>
-									Change capitalize ($):{' '}
+									<span>Change capitalize ($):</span>
 								</Typography>
 								<Typography
 									variant='h2'
