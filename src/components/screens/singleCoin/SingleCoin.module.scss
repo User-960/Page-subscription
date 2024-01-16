@@ -1,35 +1,35 @@
 .singleCoin {
 	padding: 5px;
-	display: flex;
-	align-items: center;
+	display: flex !important;
+	align-items: center !important;
 }
 
 .coinName {
-	display: flex;
-	justify-content: center;
+	display: flex !important;
+	justify-content: center !important;
 	width: auto;
 	height: auto;
 	margin: 50px 0px;
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	flex-wrap: wrap !important;
 }
 
 .card {
-	display: flex;
-	justify-content: center;
+	display: flex !important;
+	justify-content: center !important;
 	min-width: 320px;
 	margin: 0 auto;
 }
 
 .cardItem {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
 	padding: 20px 16px;
 	width: 100%;
 	max-width: 500px;

@@ -1,7 +1,7 @@
 .tableContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
 }
 
 .topListTable {
@@ -14,8 +14,8 @@
 }
 
 .watchlistName {
-	display: flex;
-	justify-content: center;
+	display: flex !important;
+	justify-content: center !important;
 	width: auto;
 	height: auto;
 	margin: 40px 0px;

@@ -62,10 +62,10 @@
 
 @media (max-width: 630px) {
 	.newsBlock {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: space-between !important;
+		align-items: center !important;
 
 		& img {
 			margin-bottom: 20px;
