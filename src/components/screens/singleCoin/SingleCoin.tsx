@@ -90,7 +90,11 @@ const SingleCoin: FC = (): JSX.Element => {
 				<Grid container spacing={2} className={styles.singleCoin}>
 					<Grid item xs={12} className={styles.container}>
 						<Avatar src={findCoin.image} className={styles.coinIcon} />
-						<Typography variant='h2' className={styles.coinName}>
+						<Typography
+							variant='h2'
+							className={styles.coinName}
+							sx={{ marginTop: '20px', marginBottom: '20px' }}
+						>
 							{findCoin.name}
 						</Typography>
 					</Grid>
