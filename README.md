@@ -1,17 +1,17 @@
-# Page-subscription
+# Project-crypto-statistics
 
-The main purpose of the project is to write the project on stack: React, TypeScript, Next.js. The project itself is a landing.
+The main purpose of the project is to write the project on stack: React, TypeScript, Next.js, Redux Toolkit, Material UI. The project itself is an SPA for checking information about various cryptocurrencies.
 
 ## What is used:
 
 - Programming languages: HTML, CSS, TypeScript;
 - Preprocessor: SCSS;
-- Libraries: React, Next.js, Tailwind, CSS Modules, axios, clsx, @tanstack/react-query;
+- Libraries: React, Next.js, Redux Toolkit, React Hook Form, Tailwind, CSS Modules, Material UI, Chart.js, js-cookie, yup;
 
 ## To clone repository
 
 ```shell
-https://github.com/User-960/Page-subscription.git
+https://github.com/User-960/Project-crypto-statistics.git
 ```
 
 ## Available Scripts
