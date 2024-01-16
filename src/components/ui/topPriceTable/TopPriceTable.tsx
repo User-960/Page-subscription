@@ -26,12 +26,12 @@ import { deleteCoin, saveCoin } from '@/store/slice/watchlist/watchlistSlice'
 const cn = require('clsx')
 interface ITopPriceListProps {
 	coins: ICoin[]
-	setIsOpenSnackbar: () => void
+	setIsOpenSnackbar?: () => void
 }
 
 const TopPriceTable: FC<ITopPriceListProps> = ({
 	coins,
-	setIsOpenSnackbar
+	setIsOpenSnackbar = () => null
 }): JSX.Element => {
 	const watchlist = useWatchlist()
 	const dispatch = useAppDispatch()
