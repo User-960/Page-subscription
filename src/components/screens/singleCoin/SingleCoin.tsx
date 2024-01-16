@@ -46,7 +46,9 @@ const SingleCoin: FC = (): JSX.Element => {
 	const coins = useCoins()
 	const watchlistArray = useWatchlist()
 
-	const findCoin = coins.find(coin => coin.name === params.id)
+	const findCoin = coins.find(coin =>
+		coin.name === params.id ? params.id : 'Bitcoin'
+	)
 
 	const coinInWatchList = coins.filter(coin => {
 		return watchlistArray.some((otherElement: any) => {
