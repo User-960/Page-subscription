@@ -18,18 +18,10 @@ export const newsSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: builder => {
-		// builder.addCase(loginUserThunk.pending, (state: IAuthState, action) => {
-		// 	state.isLogged = false
-		// 	state.isLoading = true
-		// })
 		builder.addCase(getNews.fulfilled, (state: INewsState, action) => {
 			state.news = action.payload
 			state.isLoading = false
 		})
-		// builder.addCase(loginUserThunk.rejected, (state: IAuthState, action) => {
-		// 	state.isLogged = false
-		// 	state.isLoading = false
-		// })
 	}
 })
 

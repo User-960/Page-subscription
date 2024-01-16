@@ -16,8 +16,6 @@ import React, { FC, useEffect, useState } from 'react'
 
 import { useAppDispatch, useWatchlist } from '@/components/hooks/useApp'
 
-import TrendDown from '../../../assets/images/Chart/trendDown.svg'
-import TrendUp from '../../../assets/images/Chart/trendUp.svg'
 import ErrorBlock from '../errorBlock/ErrorBlock'
 
 import styles from './TopPriceTable.module.scss'

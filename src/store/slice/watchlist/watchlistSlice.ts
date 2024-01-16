@@ -37,10 +37,6 @@ export const watchlistSlice = createSlice({
 				state.isLoading = false
 			}
 		),
-			// builder.addCase(loginUserThunk.pending, (state: IAuthState, action) => {
-			// 	state.isLogged = false
-			// 	state.isLoading = true
-			// })
 			builder.addCase(
 				getAllWatchlistThunk.fulfilled,
 				(state: IWatchlistState, action) => {
@@ -48,10 +44,6 @@ export const watchlistSlice = createSlice({
 					state.isLoading = false
 				}
 			)
-		// builder.addCase(loginUserThunk.rejected, (state: IAuthState, action) => {
-		// 	state.isLogged = false
-		// 	state.isLoading = false
-		// })
 	}
 })
 export const { saveCoin, deleteCoin } = watchlistSlice.actions
