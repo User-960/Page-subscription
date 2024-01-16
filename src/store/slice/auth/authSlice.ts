@@ -9,8 +9,8 @@ import {
 
 const initialState: IAuthState = {
 	userData: null,
-	userName: null,
-	isLogged: false,
+	userName: 'User',
+	isLogged: true,
 	isLoading: false
 }
 

@@ -40,3 +40,8 @@ export const useWatchlist = () => {
 	const { watchlist } = useAppSelector(state => state.watchlist)
 	return watchlist
 }
+
+export const useNews = () => {
+	const { news } = useAppSelector(state => state.news)
+	return news
+}
