@@ -16,11 +16,14 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
 .card {
 	display: flex;
 	justify-content: center;
+	min-width: 320px;
+	margin: 0 auto;
 }
 
 .cardItem {
@@ -77,4 +80,10 @@
 .btnNoActive {
 	opacity: 0.5;
 	cursor: not-allowed;
+}
+
+@media (max-width: 310px) {
+	.card {
+		padding: 0px 16px;
+	}
 }
