@@ -67,11 +67,11 @@
 }
 
 .chartContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: flex-end !important;
 
-	align-self: end;
+	align-self: end !important;
 }
 
 .areaChart {
@@ -92,16 +92,16 @@
 
 @media (max-width: 600px) {
 	.topCardItem {
-		flex-wrap: nowrap;
+		flex-wrap: nowrap !important;
 	}
 }
 
 @media (max-width: 510px) {
 	.chartContainer {
-		display: none;
+		display: none !important;
 	}
 
 	.lineChartBlock {
-		display: none;
+		display: none !important;
 	}
 }
