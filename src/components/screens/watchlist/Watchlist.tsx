@@ -101,19 +101,20 @@ const Watchlist: FC = (): JSX.Element => {
 					<Grid item xs={12} sm={12} lg={12} className={styles.tableContainer}>
 						<TopPriceTable coins={currentCoins} />
 
-						{filteredArray.length > 10 && (
-							<Button
-								onClick={() => nextCoins()}
-								variant='contained'
-								sx={{
-									margin: '15px auto',
-									width: '160px',
-									backgroundColor: '#1900d5 !important'
-								}}
-							>
-								Next Coins
-							</Button>
-						)}
+						{filteredArray.length > 10 &&
+							coinsPerPage <= currentCoins.length && (
+								<Button
+									onClick={() => nextCoins()}
+									variant='contained'
+									sx={{
+										margin: '15px auto',
+										width: '160px',
+										backgroundColor: '#1900d5 !important'
+									}}
+								>
+									Next Coins
+								</Button>
+							)}
 					</Grid>
 				</Grid>
 			)}

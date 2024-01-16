@@ -5,13 +5,16 @@
 
 .cellName {
 	display: flex !important;
-	& img {
-		margin-right: 10px;
-	}
 
 	& span {
 		margin-right: 10px;
 	}
+}
+
+.cellImage {
+	width: 19px;
+	height: 19px;
+	margin-right: 10px;
 }
 
 .trendUp {

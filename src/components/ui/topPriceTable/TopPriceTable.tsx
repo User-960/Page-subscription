@@ -66,10 +66,11 @@ const TopPriceTable: FC<ITopPriceListProps> = ({ coins }): JSX.Element => {
 								<TableCell component='th' scope='row'>
 									<p className={styles.cellName}>
 										<span>{index + 1}.</span>
-										<img
+										<Image
 											src={coin.image}
-											width={20}
-											height={20}
+											width={19}
+											height={19}
+											className={styles.cellImage}
 											alt={coin.name}
 										/>{' '}
 										{coin.name}
