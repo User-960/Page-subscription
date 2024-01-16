@@ -4,8 +4,13 @@
 }
 
 .cellName {
+	display: flex !important;
+	& img {
+		margin-right: 10px;
+	}
+
 	& span {
-		margin-right: 5px;
+		margin-right: 10px;
 	}
 }
 

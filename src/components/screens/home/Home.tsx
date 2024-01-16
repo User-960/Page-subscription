@@ -32,14 +32,13 @@ import {
 	ICoin,
 	ICoinChartData
 } from '@/interfaces/coins.interface/coins.interface'
+import { coinsMock } from '@/mocks/coins/coins'
 import {
 	chartPriceCoinsThunk,
 	favoriteCoinsThunk,
 	getTopPriceThunk
 } from '@/store/thunks/coinsThunk/coinsThunk'
 import { tokens } from '@/theme/theme'
-
-const cn = require('clsx')
 
 const Home: FC = (): JSX.Element => {
 	const meta: IMeta = {
@@ -50,7 +49,10 @@ const Home: FC = (): JSX.Element => {
 	const theme = useTheme()
 	const colors = tokens(theme.palette.mode)
 
-	const testCoins = useMemo(() => ['bitcoin', 'ethereum'], [])
+	const areaChartCoins = useMemo(
+		() => [coinsMock.firstCoin, coinsMock.secondCoin],
+		[]
+	)
 
 	const coins = useCoins()
 	const chartPriceCoins = useChartPriceCoins()
@@ -72,33 +74,35 @@ const Home: FC = (): JSX.Element => {
 	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
 	// ----
 
-	const fetchData = useCallback(
-		(data: string[]) => {
-			data.forEach(el => {
-				dispatch(chartPriceCoinsThunk(el))
+	const fetchAreaChartCoins = useCallback(
+		(dataCoins: string[]) => {
+			dataCoins.forEach(coin => {
+				dispatch(chartPriceCoinsThunk(coin))
 			})
 		},
 		[dispatch]
 	)
 
-	const fetchDataRef = useRef(false)
+	const fetchAreaChartCoinsRef = useRef(false)
 
 	useEffect(() => {
-		if (fetchDataRef.current) {
-			console.log(1)
+		if (fetchAreaChartCoinsRef.current) {
+			console.log('No request for coins №1')
 			return
 		} else {
 			if (chartPriceCoins.length === 0 && coins.length === 0) {
-				console.log(2)
-				fetchDataRef.current = true
-				fetchData(testCoins)
+				console.log('Request for favorites coins №2')
+				fetchAreaChartCoinsRef.current = true
+				fetchAreaChartCoins(areaChartCoins)
+
+				console.log('Request for list coins №3')
 				dispatch(getTopPriceThunk(''))
 			} else {
-				console.log(3)
+				console.log('No request for coins №4')
 				return
 			}
 		}
-	}, [testCoins, fetchData, dispatch, chartPriceCoins, coins])
+	}, [areaChartCoins, fetchAreaChartCoins, dispatch, chartPriceCoins, coins])
 
 	const renderChartBlock =
 		filteredChartPriceCoins.length === 0 ? (
