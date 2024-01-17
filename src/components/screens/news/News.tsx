@@ -65,7 +65,14 @@ const News: FC = (): JSX.Element => {
 
 				<Box className={styles.newsCategories}>
 					<Typography variant='body1'>
-						Categories: <span>{element.categories}</span>
+						Categories:{' '}
+						<span>
+							{element.categories.length > 28
+								? `${element.categories.split('|')[0]}|${
+										element.categories.split('|')[1]
+									}`
+								: element.categories}
+						</span>
 					</Typography>
 				</Box>
 
