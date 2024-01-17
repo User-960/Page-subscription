@@ -136,7 +136,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({
 									</button>
 								</TableCell>
 
-								<TableCell align='right'>
+								<TableCell align='right' sx={{ padding: '10px' }}>
 									Change ($){' '}
 									<button
 										onClick={() => {
@@ -152,7 +152,7 @@ const TopPriceTable: FC<ITopPriceListProps> = ({
 									</button>
 								</TableCell>
 
-								<TableCell align='right'>
+								<TableCell align='right' sx={{ padding: '10px' }}>
 									Change (%){''}
 									<button
 										onClick={() => {
