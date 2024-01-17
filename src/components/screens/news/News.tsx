@@ -1,5 +1,7 @@
-import { Box, Grid, Link, Typography, useTheme } from '@mui/material'
-import React, { FC, useEffect } from 'react'
+import { Box, Button, Grid, Link, Typography, useTheme } from '@mui/material'
+import React, { FC, useEffect, useState } from 'react'
+
+import ErrorBlock from '@/components/ui/errorBlock/ErrorBlock'
 
 import { useAppDispatch, useNews } from '@/components/hooks/useApp'
 
@@ -28,8 +30,20 @@ const News: FC = (): JSX.Element => {
 
 	const filteredNews = news.filter(element => element.body.length < 500)
 
-	const renderNewsBlock = filteredNews.map(element => (
+	// Pagination
+	const [currentPage] = useState<number>(1)
+	const [newsPerPage, setNewsPerPage] = useState<number>(10)
+
+	const lastNewsIndex = currentPage * newsPerPage
+	const firstNewsIndex = lastNewsIndex - newsPerPage
+	const currentNews = filteredNews?.slice(firstNewsIndex, lastNewsIndex)
+
+	const nextCoins = () => setNewsPerPage(prev => prev + 10)
+	// ----
+
+	const renderNewsBlock = currentNews.map(element => (
 		<Grid
+			key={element.id}
 			className={styles.newsBlock}
 			sx={{
 				backgroundColor: `${
@@ -85,7 +99,40 @@ const News: FC = (): JSX.Element => {
 				<Grid className={styles.blockTitle}>
 					<Typography variant='h2'>News</Typography>
 				</Grid>
-				<Grid>{renderNewsBlock}</Grid>
+
+				{news.length === 0 ? (
+					<Grid container>
+						<Grid
+							item
+							xs={12}
+							sm={12}
+							lg={12}
+							className={styles.newsBlockError}
+						>
+							<ErrorBlock />
+						</Grid>
+					</Grid>
+				) : (
+					<>
+						<Grid>{renderNewsBlock}</Grid>
+						<Grid className={styles.blockBtn}>
+							{filteredNews.length > 10 &&
+								newsPerPage <= currentNews.length && (
+									<Button
+										onClick={() => nextCoins()}
+										variant='contained'
+										sx={{
+											margin: '15px auto',
+											width: '160px',
+											backgroundColor: '#1900d5 !important'
+										}}
+									>
+										Next News
+									</Button>
+								)}
+						</Grid>
+					</>
+				)}
 			</Grid>
 		</Layout>
 	)

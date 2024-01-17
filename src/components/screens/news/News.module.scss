@@ -61,6 +61,15 @@
 	text-align: start;
 }
 
+.blockBtn {
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.newsBlockError {
+	min-width: 500px;
+}
+
 @media (max-width: 800px) {
 	.newsBlock {
 		display: flex !important;
@@ -72,6 +81,12 @@
 			margin-bottom: 20px;
 		}
 	}
+}
+
+@media (max-width: 640px) {
+	.newsBlockError {
+	min-width: 200px;
+}
 }
 
 @media (max-width: 380px) {
