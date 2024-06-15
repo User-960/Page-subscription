@@ -78,7 +78,8 @@ const Home: FC = (): JSX.Element => {
 
 	const lastCoinIndex = currentPage * coinsPerPage
 	const firstCoinIndex = lastCoinIndex - coinsPerPage
-	const currentCoins = coins?.slice(firstCoinIndex, lastCoinIndex)
+	// const currentCoins = coins?.slice(firstCoinIndex, lastCoinIndex)
+	const currentCoins = coins
 
 	const nextCoins = () => setCoinsPerPage(prev => prev + 10)
 	// ----
